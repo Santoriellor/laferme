@@ -1,0 +1,25 @@
+{
+    "news": [
+        {
+            "id": "1",
+            "title": "New Hiking Trails Open!",
+            "date": "January 10, 2025",
+            "image": "/images/news/bike-trail.jpg",
+            "content": "Discover the new scenic hiking trails now open to the public..."
+          },
+          {
+            "id": "2",
+            "title": "Community Cleanup Success",
+            "date": "January 10, 2025",
+            "image": "/images/news/clean-beach.jpg",
+            "content": "Our community came together for a successful cleanup event..."
+          },
+          {
+            "id": "3",
+            "title": "Last Winter Storm",
+            "date": "January 14, 2025",
+            "image": "/images/news/farm-in-tuscany.jpg",
+            "content": "News talking about last winter storm and the resulting damage."
+          }
+    ]
+  }

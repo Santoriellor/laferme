@@ -1,0 +1,25 @@
+{
+    "news": [
+        {
+            "id": "1",
+            "title": "Nouveaux sentiers de randonnée ouverts !",
+            "date": "January 10, 2025",
+            "image": "/images/news/bike-trail.jpg",
+            "content": "Découvrez les nouveaux sentiers de randonnée pittoresques désormais ouverts au public..."
+          },
+          {
+            "id": "2",
+            "title": "Nettoyage communautaire réussi",
+            "date": "January 10, 2025",
+            "image": "/images/news/clean-beach.jpg",
+            "content": "Notre communauté s'est réunie pour un événement de nettoyage réussi..."
+          },
+          {
+            "id": "3",
+            "title": "La dernière tempête hivernale",
+            "date": "January 14, 2025",
+            "image": "/images/news/farm-in-tuscany.jpg",
+            "content": "Des nouvelles concernant la dernière tempête hivernale et les dommages occasionés."
+          }
+    ]
+  }

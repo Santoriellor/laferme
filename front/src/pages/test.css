@@ -1,0 +1,7 @@
+#fundraiser {
+    color: #af1a1a;
+    width: 100%;    
+    height: 800px;
+    position: relative;
+    background: url('../assets/images/hero-banner.jpeg') center/cover no-repeat;
+  }

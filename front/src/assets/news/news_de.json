@@ -1,0 +1,25 @@
+{
+    "news": [
+        {
+            "id": "1",
+            "title": "Neue Wanderwege eröffnet!",
+            "date": "January 10, 2025",
+            "image": "/images/news/bike-trail.jpg",
+            "content": "Entdecken Sie die neuen malerischen Wanderwege, die jetzt für die Öffentlichkeit geöffnet sind..."
+          },
+          {
+            "id": "2",
+            "title": "Erfolgreiche Gemeinschaftsaufräumaktion",
+            "date": "January 10, 2025",
+            "image": "/images/news/clean-beach.jpg",
+            "content": "Unsere Gemeinschaft hat sich zu einer erfolgreichen Aufräumaktion zusammengefunden..."
+          },
+          {
+            "id": "3",
+            "title": "Der letzte Wintersturm",
+            "date": "January 14, 2025",
+            "image": "/images/news/farm-in-tuscany.jpg",
+            "content": "Neuigkeiten über den letzten Wintersturm."
+          }
+    ]
+  }

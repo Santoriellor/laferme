@@ -1,0 +1,35 @@
+{
+    "headerTitle_old": "Save Le Canne",
+    "headerTitle": "Welcome to La Ferme",
+    "menuHome": "Home",
+    "menuAboutUs": "About Us",
+    "menuContact": "Contact",
+    "menuNews": "News",
+    "menuGallery": "Gallery",
+    "menuTestimonials": "Testimonials",
+    "menuMore": "More ▼",
+
+    "fundraiserTitle_old": "Help Us Save Le Canne",
+    "fundraiserTitle": "Help Us Save La Ferme",
+    "fundraiserText_old": "Le Canne should continue to exist as the most beautiful holiday destination in Tuscany.\nWe probably share this idea with many enthusiasts ;). Since we lack the financial means to purchase it, we rely on your support. Only together can we save Le Canne.\nSoon, you'll find the link to the crowdfunding campaign here. Follow us on your favorite channels to stay updated!\nEvery donation counts!",
+    "fundraiserText": "The farm must continue to exist as the most beautiful holiday destination in Tuscany.\nWe probably share this idea with many passionate people ;).\n\nAfter last winter's storm and the resulting damage, we are counting on your support.\nEvery donation counts!",
+    "fundraiserProgressGoalBefore": " raised of ",
+    "fundraiserProgressGoalAfter": " goal",
+    "fundraiserDonate": "Donate Now",
+    "fundraiserLearnMore": "Learn More",
+    "fundraiserDonateFixed": "Donate",
+
+    "contactTitle": "Contact",
+    "contactDescr": "We'd love to hear from you! Reach out to us for any inquiries.",
+    "contactName": "Your Name",
+    "contactEmail": "Your Email",
+    "contactMsg": "Your Message",
+    "contactSend": "Send Message",
+    
+    "blogTitle": "Latest News",
+
+    "testimonialsTitle": "What People Say",
+
+    "footerName": "Guesthouse La Ferme",
+    "footerRights": "All Rights Reserved"
+}

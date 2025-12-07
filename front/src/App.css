@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quintessential&display=swap');
+ */
+:root {
+  --color1: #93441A;
+  --color2: rgb(182, 115, 50);
+  --color3: rgb(218, 171, 58);
+  --color4: #EEE6D8;
+  --color5: #e5e7e6;
+  --colorwhite: white;
+  --colorblack: black;
+  --font1: "Poppins", sans-serif;
+  --font2: "Quintessential", sans-serif;
+}
+
+#root, .App, main {
+  display: block;
+  width: 100%;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  /* outline: 1px solid red; */
+}
+
+body {
+  scroll-behavior: smooth;
+	margin: 0;
+	font-family: var(--font1);
+  min-width: 375px;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto; 
+}
+
+.content {
+  width: 100%;
+}
+
+.main-container {
+  margin-top: 100px;
+  margin-bottom: 60px;
+  padding: 0;
+  width: 100%;
+}
+
+

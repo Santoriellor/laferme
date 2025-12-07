@@ -1,0 +1,117 @@
+#testimonials {
+  position: relative;
+  width: 100%;
+  min-height: fit-content;
+  background: var(--colorwhite);
+  margin: 0;
+  padding: 0;
+
+  text-align: center;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-start;
+}
+
+.testimonials-title {
+  margin: 15px 0;
+  padding: 0;
+  font-size: 3rem;
+  text-align: center;
+}
+
+/* Slider Container */
+.slider-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 200px; /* Adjust height as needed */
+  margin-bottom: 30px;
+}
+
+/* Shared Slider Styles */
+.slider {
+  display: flex;
+  width: max-content;
+  height: 90%;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.testimonial-card {
+  min-width: 200px;
+  max-width: 400px;
+  margin: 0 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.testimonial-card .message {
+  font-size: 1rem;
+  font-style: italic;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.5;  
+}
+
+.testimonial-card .author {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Infinite Scroll Animations */
+
+/* Top Slider: Right to Left */
+.slider-left {
+  animation: scrollLeft 50s linear infinite;
+}
+
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Bottom Slider: Left to Right */
+.slider-right {
+  animation: scrollRight 50s linear infinite;
+}
+
+@keyframes scrollRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Fading Effect on Edges */
+.slider-container::before,
+.slider-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.slider-container::before {
+  left: 0;
+  background: linear-gradient(to right, #f9f9f9, transparent);
+}
+
+.slider-container::after {
+  right: 0;
+  background: linear-gradient(to left, #f9f9f9, transparent);
+}

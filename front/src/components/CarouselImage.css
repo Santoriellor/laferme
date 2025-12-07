@@ -1,0 +1,75 @@
+.carousel-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out; /* Smooth fade effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+  }
+  
+  .carousel-image-wrapper.active {
+    opacity: 1;
+  }
+  
+  .carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the container without distortion */
+  }
+  
+  .carousel-top-text {
+    position: absolute;
+    top: 10px; /* Distance from the top */
+    left: 50%;
+    text-align: center;
+    transform: translateX(-50%);
+    color: white;
+    font-family: var(--font2);
+    font-size: 2.5rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    pointer-events: none;
+  }
+  
+  .carousel-bottom-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+    padding: 10px 0; /* Adjust padding for spacing */
+    text-align: center;
+  }
+  
+  .carousel-bottom-text .text {
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  }
+
+/* Media query for responsiveness */
+@media (max-width: 1280px) {
+    .carousel-top-text {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .carousel-top-text {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-top-text {
+        font-size: 1.4rem;
+    }
+}  

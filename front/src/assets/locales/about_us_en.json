@@ -1,0 +1,48 @@
+{
+  "team": [
+    {
+      "name": "Emma Carter",
+      "position": "Owner & Host",
+      "description": "Emma turned her family farm into a cozy guesthouse where guests can relax and reconnect with nature. She loves sharing stories and homemade recipes",
+      "image": "/images/aboutus/user2.jpg",
+      "socialLinks": {
+        "linkedin": "https://linkedin.com/in/emmafarmlife",
+        "twitter": "https://twitter.com/emmafarmlife",
+        "facebook": "https://facebook.com/emmafarmlife"
+      }
+    },
+    {
+      "name": "Liam Brooks",
+      "position": "Farm Manager",
+      "description": "Liam ensures the farm runs smoothly, from taking care of the animals to maintaining the gardens. He enjoys teaching guests about sustainable farming.",
+      "image": "/images/aboutus/user1.jpg",
+      "socialLinks": {
+        "linkedin": "https://linkedin.com/in/liamonthefarm",
+        "twitter": "https://twitter.com/liamonthefarm",
+        "facebook": "https://facebook.com/liamonthefarm"
+      }
+    },
+    {
+        "name": "Sophia Reynolds",
+        "position": "Guest Experience Coordinator",
+        "description": "Sophia organizes farm tours, local excursions, and seasonal events to make every stay unforgettable. She's passionate about hospitality and nature.",
+        "image": "/images/aboutus/user4.jpg",
+        "socialLinks": {
+            "linkedin": "https://linkedin.com/in/sophiaguesthouse",
+            "twitter": "https://twitter.com/sophiaguesthouse",
+            "facebook": "https://facebook.com/sophiaguesthouse"
+        }
+    },
+    {
+        "name": "Noah Bennett",
+        "position": "Head Chef",
+        "description": "Noah creates farm-to-table meals using fresh produce from the garden. His breakfasts and homemade jams are guest favorites!",
+        "image": "/images/aboutus/user3.jpg",
+        "socialLinks": {
+            "linkedin": "https://linkedin.com/in/noahcooks",
+            "twitter": "https://twitter.com/noahcooks",
+            "facebook": "https://facebook.com/noahcooks"
+        }
+    }
+  ]
+}

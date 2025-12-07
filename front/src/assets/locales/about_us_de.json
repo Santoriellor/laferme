@@ -1,0 +1,48 @@
+{
+  "team": [
+    {
+      "name": "Emma Carter",
+      "position": "Eigentümerin & Gastgeberin",
+      "description": "Emma hat den Familienbauernhof in ein gemütliches Gästehaus verwandelt, in dem Besucher entspannen und die Natur genießen können. Sie liebt es, Geschichten und Hausrezepte zu teilen.",
+      "image": "/images/aboutus/user2.jpg",
+      "socialLinks": {
+        "linkedin": "https://linkedin.com/in/emmafarmlife",
+        "twitter": "https://twitter.com/emmafarmlife",
+        "facebook": "https://facebook.com/emmafarmlife"
+      }
+    },
+    {
+      "name": "Liam Brooks",
+      "position": "Betriebsleiter des Bauernhofs",
+      "description": "Liam sorgt dafür, dass der Bauernhof reibungslos läuft - von der Tierpflege bis zum Gemüsegarten. Er erklärt den Gästen gerne nachhaltige Landwirtschaft.",
+      "image": "/images/aboutus/user1.jpg",
+      "socialLinks": {
+        "linkedin": "https://linkedin.com/in/liamonthefarm",
+        "twitter": "https://twitter.com/liamonthefarm",
+        "facebook": "https://facebook.com/liamonthefarm"
+      }
+    },
+    {
+        "name": "Sophia Reynolds",
+        "position": "Gästebetreuungskoordinatorin",
+        "description": "Sophia organisiert Hofführungen, lokale Ausflüge und saisonale Veranstaltungen, um jeden Aufenthalt unvergesslich zu machen. Sie liebt Gastfreundschaft und Natur.",
+        "image": "/images/aboutus/user4.jpg",
+        "socialLinks": {
+            "linkedin": "https://linkedin.com/in/sophiaguesthouse",
+            "twitter": "https://twitter.com/sophiaguesthouse",
+            "facebook": "https://facebook.com/sophiaguesthouse"
+        }
+    },
+    {
+        "name": "Noah Bennett",
+        "position": "Küchenchef",
+        "description": "Noah zaubert vom Bauernhof direkt auf den Teller und verwendet frische Produkte aus dem Garten. Seine Frühstücke und hausgemachten Marmeladen sind bei den Gästen besonders beliebt!",
+        "image": "/images/aboutus/user3.jpg",
+        "socialLinks": {
+            "linkedin": "https://linkedin.com/in/noahcooks",
+            "twitter": "https://twitter.com/noahcooks",
+            "facebook": "https://facebook.com/noahcooks"
+        }
+    }
+  ]
+}

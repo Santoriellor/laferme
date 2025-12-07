@@ -1,0 +1,35 @@
+{
+    "headerTitle_old": "Rette Le Canne",
+    "headerTitle": "Wilkommen zur La Ferme",
+    "menuHome": "Startseite",
+    "menuAboutUs": "About Us",
+    "menuContact": "Kontact",
+    "menuNews": "Nachrichten",
+    "menuGallery": "Impressionen",
+    "menuTestimonials": "Erfahrungsberichte",
+    "menuMore": "Mehr ▼",
+
+    "fundraiserTitle_old": "Rette mit Uns Le Canne",
+    "fundraiserTitle": "Rette mit Uns La Ferme",
+    "fundraiserText_old": "Le Canne soll weiterhin als schönster Ferienort in der Toscana existieren.\nDiese Idee teilen wir wohl mit vielen Begeisterten ;). Da uns die finanziellen Mittel für den Kauf fehlen, sind wir auf eure Hilfe angewiesen. Nur gemeinsam können wir Le Canne retten. In Kürze findet ihr hier den Link zum Crowdfunding. Folgt uns auf euren Lieblingskanälen, um nichts zu verpassen!\nJede Spende zählt!",
+    "fundraiserText": "Der Bauernhof muss weiterhin als das schönste Urlaubsziel in der Toskana bestehen.\nDiese Idee teilen wir wahrscheinlich mit vielen Gleichgesinnten ;).\n\n Nach dem Sturm im letzten Winter und den daraus entstandenen Schäden zählen wir auf eure Unterstützung.\nJede Spende zählt!",
+    "fundraiserProgressGoalBefore": " von ",
+    "fundraiserProgressGoalAfter": " Ziel",
+    "fundraiserDonate": "Spenden Jetzt",
+    "fundraiserLearnMore": "Mehr erfahren",
+    "fundraiserDonateFixed": "Spenden",
+
+    "contactTitle": "Kontact",
+    "contactDescr": "Wir würden uns freuen, von Ihnen zu hören! Kontaktieren Sie uns bei Fragen.",
+    "contactName": "Ihr Name",
+    "contactEmail": "Ihre Email",
+    "contactMsg": "Ihre Nachricht",
+    "contactSend": "Message Senden",
+
+    "blogTitle": "Neueste Nachrichten",
+
+    "testimonialsTitle": "Was die Leute über us sagen",
+
+    "footerName": "Bauerhof Gästhaus La Ferme",
+    "footerRights": "Alle Rechte vorbehalten"
+}

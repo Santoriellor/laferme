@@ -1,0 +1,36 @@
+{
+    "headerTitle_old": "Sauvons Le Canne",
+    "headerTitle": "Bienvenue à la Ferme",
+
+    "menuHome": "Accueil",
+    "menuAboutUs": "À propos",
+    "menuContact": "Contact",
+    "menuNews": "Actualités",
+    "menuGallery": "Gallerie",
+    "menuTestimonials": "Témoignages",
+    "menuMore": "Plus ▼",
+
+    "fundraiserTitle_old": "Sauvons Le Canne",
+    "fundraiserTitle": "Sauvons La Ferme",
+    "fundraiserText_old": "Le Canne doit continuer d'exister comme la plus belle destination de vacances en Toscane.\nNous partageons probablement cette idée avec de nombreux passionnés ;). Comme nous manquons des moyens financiers pour l'achat, nous comptons sur votre soutien. Ensemble, nous pouvons sauver Le Canne.\nBientôt, vous trouverez ici le lien vers la campagne de financement participatif. Suivez-nous sur vos réseaux préférés pour ne rien manquer !\nChaque don compte !",
+    "fundraiserText": "La Ferme doit continuer d'exister comme la plus belle destination de vacances en Toscane.\nNous partageons probablement cette idée avec de nombreux passionnés ;).\n\nSuite à la tempête de l'hiver dernier et les dégâts conséquents, nous comptons sur votre soutien.\nChaque don compte !",
+    "fundraiserProgressGoalBefore": " récolté sur ",
+    "fundraiserProgressGoalAfter": " d'objectif",
+    "fundraiserDonate": "Donner Maintenant",
+    "fundraiserLearnMore": "En savoir plus",
+    "fundraiserDonateFixed": "Donate",
+
+    "contactTitle": "Contact",
+    "contactDescr": "Nous serions ravis de vous entendre ! Contactez-nous pour toute demande.",
+    "contactName": "Votre Nom",
+    "contactEmail": "Votre Adresse Email",
+    "contactMsg": "Votre Message",
+    "contactSend": "Envoyer",
+
+    "blogTitle": "Dernières Actualités",
+    
+    "testimonialsTitle": "Ce que les gens en disent",
+
+    "footerName": "Maison d'hôtes La Ferme",
+    "footerRights": "Tous droits réservés"
+}
