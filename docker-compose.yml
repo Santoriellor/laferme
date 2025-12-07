@@ -6,14 +6,14 @@ services:
       - "traefik.enable=true"
 
       # HTTPS router
-      - "traefik.http.routers.santoriello-frontend.rule=Host(`website.santoriello.ch`)"
-      - "traefik.http.routers.santoriello-frontend.entrypoints=websecure"
-      - "traefik.http.routers.santoriello-frontend.tls.certresolver=le"
+      - "traefik.http.routers.laferme-frontend.rule=Host(`website.santoriello.ch`)"
+      - "traefik.http.routers.laferme-frontend.entrypoints=websecure"
+      - "traefik.http.routers.laferme-frontend.tls.certresolver=le"
 
       # HTTP → HTTPS redirect router
-      - "traefik.http.routers.santoriello-frontend-http.rule=Host(`website.santoriello.ch`)"
-      - "traefik.http.routers.santoriello-frontend-http.entrypoints=web"
-      - "traefik.http.routers.santoriello-frontend-http.middlewares=redirect-to-https"
+      - "traefik.http.routers.laferme-frontend-http.rule=Host(`website.santoriello.ch`)"
+      - "traefik.http.routers.laferme-frontend-http.entrypoints=web"
+      - "traefik.http.routers.laferme-frontend-http.middlewares=redirect-to-https"
 
       # Middleware to redirect HTTP → HTTPS
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
