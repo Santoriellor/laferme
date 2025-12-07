@@ -1,14 +1,25 @@
 services:
   frontend:
-    image: nginx:alpine
-    volumes:
-      - ./dist:/usr/share/nginx/html:ro
+    build: ./front
     labels:
+      # Enable Traefik
       - "traefik.enable=true"
-      - "traefik.http.routers.app1-frontend.rule=Host(`website.santoriello.com`)"
-      - "traefik.http.routers.app1-frontend.entrypoints=websecure"
-      - "traefik.http.routers.app1-frontend.tls.certresolver=le"
-      - "traefik.http.services.app1-frontend.loadbalancer.server.port=80"
-      - "traefik.http.routers.app1-frontend.middlewares=gzip-compress,security-headers"
+
+      # HTTPS router
+      - "traefik.http.routers.santoriello-frontend.rule=Host(`website.santoriello.ch`)"
+      - "traefik.http.routers.santoriello-frontend.entrypoints=websecure"
+      - "traefik.http.routers.santoriello-frontend.tls.certresolver=le"
+
+      # HTTP → HTTPS redirect router
+      - "traefik.http.routers.santoriello-frontend-http.rule=Host(`website.santoriello.ch`)"
+      - "traefik.http.routers.santoriello-frontend-http.entrypoints=web"
+      - "traefik.http.routers.santoriello-frontend-http.middlewares=redirect-to-https"
+
+      # Middleware to redirect HTTP → HTTPS
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
     networks:
       - proxy-network
+
+networks:
+  proxy-network:
+    external: true
