@@ -1,5 +1,6 @@
 services:
   frontend:
+    restart: unless-stopped
     build: ./front
     labels:
       # Enable Traefik
