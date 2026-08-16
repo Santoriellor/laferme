@@ -11,13 +11,9 @@ services:
       - "traefik.http.routers.laferme-frontend.entrypoints=websecure"
       - "traefik.http.routers.laferme-frontend.tls.certresolver=le"
 
-      # HTTP → HTTPS redirect router
-      - "traefik.http.routers.laferme-frontend-http.rule=Host(`website.santoriello.ch`)"
-      - "traefik.http.routers.laferme-frontend-http.entrypoints=web"
-      - "traefik.http.routers.laferme-frontend-http.middlewares=redirect-to-https"
-
-      # Middleware to redirect HTTP → HTTPS
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      # security-headers and gzip-compress live in Traefik's file provider
+      # (dynamic/middlewares.yml); the @file suffix selects that provider.
+      - "traefik.http.routers.laferme-frontend.middlewares=security-headers@file,gzip-compress@file"
     networks:
       - proxy-network
 
