@@ -6,7 +6,26 @@ on:
       - main  # Deploy when pushing to the main branch
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        working-directory: front
+        run: npm ci
+      - name: Run tests
+        working-directory: front
+        env:
+          CI: true
+        run: npx react-scripts test --watchAll=false
+
   build-and-deploy:
+    needs: test
     runs-on: ubuntu-latest
     # Guard the ref here as well as in the trigger: if the trigger is ever
     # widened to run this workflow on a branch, this is what stops a feature
