@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main  # Deploy when pushing to the main branch
+      - security/phase-2e-tests  # TEMP
 
 jobs:
   test:
