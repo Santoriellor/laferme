@@ -8,6 +8,10 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    # Guard the ref here as well as in the trigger: if the trigger is ever
+    # widened to run this workflow on a branch, this is what stops a feature
+    # branch deploying to production.
+    if: github.ref == 'refs/heads/main'
 
     steps:
       # Checkout the repository
@@ -36,7 +40,7 @@ jobs:
         run: |
           ssh "$VPS_USER@$VPS_HOST" "
             set -e
-            cd $VPS_DEPLOY_PATH
+            cd '$VPS_DEPLOY_PATH'
             docker compose build frontend
             docker compose up -d frontend
           "
