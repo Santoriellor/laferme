@@ -1,0 +1,25 @@
+# Build context is ./front (docker-compose.yml: `build: ./front`), so this file
+# MUST live here. A .dockerignore at the repo root is not read for this build.
+
+# Never ship VCS metadata or dependency trees into a layer
+.git/
+.gitignore
+node_modules/
+build/
+
+# Never bake configuration or secrets into an image layer.
+# Both forms are required: .dockerignore patterns are anchored at the context
+# root, so a bare `.env` does NOT match a nested `frontend/.env`.
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
+
+# Editor and CI noise - not needed to build the app
+.idea/
+.vscode/
+.github/
+*.md
+npm-debug.log*
