@@ -1,3 +1,7 @@
 front/node_modules/
 front/build/
 .env
+
+# JetBrains IDE files - local to one machine, not project configuration
+.idea/
+*.iml
