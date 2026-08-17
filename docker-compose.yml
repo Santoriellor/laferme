@@ -2,6 +2,12 @@ services:
   frontend:
     restart: unless-stopped
     build: ./front
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     labels:
       # Enable Traefik
       - "traefik.enable=true"
