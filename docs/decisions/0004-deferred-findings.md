@@ -212,6 +212,17 @@ and the inert contact form
   focus that would need restoring is a real, reachable focus for the first
   time.
 
+## Dependencies
+
+- **`react-router-dom@7.1.1` is imported by nothing.** Task 10 deleted
+  `TourCard.js`, which was the last file to import it. It stays installed
+  rather than being removed: the site has no routes today, but
+  `front/nginx.conf` already carries `try_files $uri $uri/ /index.html` for
+  client-side routing, and pulling the router out would have to be undone the
+  moment a second page appears. It costs nothing in the bundle in the
+  meantime - webpack tree-shakes an unimported package out entirely, verified
+  by `grep -c "react-router" build/static/js/main.*.js` returning `0`.
+
 ## Miscellaneous
 
 - **`Header.js:13` uses a document-relative image URL.** `src="laferme.png"`
