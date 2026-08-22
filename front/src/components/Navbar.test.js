@@ -90,6 +90,86 @@ describe('the navigation on a narrow viewport', () => {
   });
 });
 
+describe('the navigation at a 1200px viewport', () => {
+  beforeEach(() => {
+    window.innerWidth = 1200;
+  });
+
+  it('shows all six destinations directly, with no dropdown', async () => {
+    await renderApp();
+
+    ['Home', 'About Us', 'Contact', 'News', 'Gallery', 'Testimonials'].forEach((name) => {
+      expect(screen.getByRole('button', { name })).toBeInTheDocument();
+    });
+    expect(screen.queryByRole('button', { name: 'More ▼' })).toBeNull();
+  });
+});
+
+describe('the navigation at a 1100px viewport', () => {
+  beforeEach(() => {
+    window.innerWidth = 1100;
+  });
+
+  it('shows five destinations and tucks Testimonials into the More dropdown', async () => {
+    await renderApp();
+
+    ['Home', 'About Us', 'Contact', 'News', 'Gallery'].forEach((name) => {
+      expect(screen.getByRole('button', { name })).toBeInTheDocument();
+    });
+    expect(screen.queryByRole('button', { name: 'Testimonials' })).toBeNull();
+
+    fireEvent.click(screen.getByRole('button', { name: 'More ▼' }));
+
+    expect(screen.getByRole('button', { name: 'Testimonials' })).toBeInTheDocument();
+  });
+});
+
+describe('the navigation at an 800px viewport', () => {
+  beforeEach(() => {
+    window.innerWidth = 800;
+  });
+
+  it('shows three destinations and tucks News, Gallery and Testimonials into the More dropdown', async () => {
+    await renderApp();
+
+    ['Home', 'About Us', 'Contact'].forEach((name) => {
+      expect(screen.getByRole('button', { name })).toBeInTheDocument();
+    });
+    ['News', 'Gallery', 'Testimonials'].forEach((name) => {
+      expect(screen.queryByRole('button', { name })).toBeNull();
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: 'More ▼' }));
+
+    ['News', 'Gallery', 'Testimonials'].forEach((name) => {
+      expect(screen.getByRole('button', { name })).toBeInTheDocument();
+    });
+  });
+});
+
+describe('the navigation at a 700px viewport', () => {
+  beforeEach(() => {
+    window.innerWidth = 700;
+  });
+
+  it('shows two destinations and tucks Contact, News, Gallery and Testimonials into the More dropdown', async () => {
+    await renderApp();
+
+    ['Home', 'About Us'].forEach((name) => {
+      expect(screen.getByRole('button', { name })).toBeInTheDocument();
+    });
+    ['Contact', 'News', 'Gallery', 'Testimonials'].forEach((name) => {
+      expect(screen.queryByRole('button', { name })).toBeNull();
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: 'More ▼' }));
+
+    ['Contact', 'News', 'Gallery', 'Testimonials'].forEach((name) => {
+      expect(screen.getByRole('button', { name })).toBeInTheDocument();
+    });
+  });
+});
+
 describe('language switching', () => {
   it('replaces the header, the menu and the team copy when French is chosen', async () => {
     await renderApp();

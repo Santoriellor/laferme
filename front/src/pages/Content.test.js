@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import { fireEvent, render, screen } from '@testing-library/react';
 import App from '../App';
 
@@ -53,6 +55,11 @@ describe('the team section', () => {
     expect(links).toHaveLength(12);
     expect(links[0]).toHaveAttribute('href', 'https://twitter.com/emmafarmlife');
   });
+
+  it('renders exactly four team members', async () => {
+    const { container } = await renderApp();
+    expect(container.querySelectorAll('.our-team')).toHaveLength(4);
+  });
 });
 
 describe('the news section', () => {
@@ -61,6 +68,11 @@ describe('the news section', () => {
     expect(screen.getByText('New Hiking Trails Open!')).toBeInTheDocument();
     expect(screen.getByText('Community Cleanup Success')).toBeInTheDocument();
     expect(screen.getByText('Last Winter Storm')).toBeInTheDocument();
+  });
+
+  it('renders exactly as many items as the English news file has', async () => {
+    const { container } = await renderApp();
+    expect(container.querySelectorAll('.blog-card')).toHaveLength(3);
   });
 
   it('opens a modal holding the full article when an item is chosen', async () => {
@@ -97,6 +109,14 @@ describe('the testimonials section', () => {
     await renderApp();
     expect(global.fetch).toHaveBeenCalledWith('/testimonials/testimonials.json');
   });
+
+  it('has a real testimonials.json backing the fetch it stubs above', () => {
+    const testimonialsPath = path.join(
+      __dirname, '..', '..', 'public', 'testimonials', 'testimonials.json',
+    );
+    const raw = fs.readFileSync(testimonialsPath, 'utf8');
+    expect(() => JSON.parse(raw)).not.toThrow();
+  });
 });
 
 describe('the showcase carousel', () => {
@@ -105,5 +125,27 @@ describe('the showcase carousel', () => {
     expect(container.querySelectorAll('.carousel-image')).toHaveLength(3);
     expect(container.querySelectorAll('.carousel-image-wrapper.active')).toHaveLength(1);
     expect(container.querySelectorAll('.indicator')).toHaveLength(3);
+  });
+
+  it('renders the three images in order', async () => {
+    const { container } = await renderApp();
+    const sources = Array.from(container.querySelectorAll('.carousel-image')).map(
+      (img) => img.getAttribute('src'),
+    );
+    expect(sources).toEqual([
+      'farm-in-tuscany.jpg',
+      'bike-tour-tuscany.jpg',
+      'horse-riding-tuscany.jpg',
+    ]);
+  });
+});
+
+describe('the contact form', () => {
+  it('renders the name, email, message and submit controls', async () => {
+    await renderApp();
+    expect(screen.getByPlaceholderText('Your Name')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Your Email')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Your Message')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Send Message' })).toBeInTheDocument();
   });
 });
