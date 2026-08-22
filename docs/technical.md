@@ -201,9 +201,6 @@ does not produce a diff nobody asked for.
 
 ## Verifying a CSS change
 
-*Stub - filled in by Task 5 of the refactor cycle, which adds
-`front/scripts/css-digest.js` and records the baseline digest.*
-
 Consolidating stylesheets is invisible when it is correct and invisible when it
 is subtly wrong, so it is not verified by looking at the page. It is verified
 by reducing the **built** stylesheet - `front/build/static/css/main.*.css`,
@@ -211,11 +208,42 @@ after webpack has concatenated all 15 imports and resolved the cascade - to an
 order-free, `var()`-resolved list of `selector | property: value` lines, and
 diffing that against the digest taken before the change.
 
+`front/scripts/css-digest.js` does the reduction. It parses the built CSS with
+`postcss` (already a `react-scripts` dependency; nothing extra is installed),
+resolves every `var(--token)` against the `:root` declarations that define it,
+and prints one sorted line per declaration as `<at-rule context>|<selector>|
+<property>:<value>`. Sorting removes the effect of rule order, and resolving
+custom properties before printing removes the effect of writing the same value
+as a literal or as the token that holds it - which is exactly what makes it
+useless for catching a change: a script that treated `padding: 0` and
+`padding: var(--zero)` as different would flag every consolidation whether or
+not it changed anything.
+
+Run it before and after a CSS change:
+
+```bash
+cd front
+npm run build
+node scripts/css-digest.js build/static/css > /tmp/css-before.txt
+
+# ... make the CSS change ...
+
+npm run build
+node scripts/css-digest.js build/static/css | diff /tmp/css-before.txt -
+```
+
 The rule every CSS task in this cycle follows:
 
-- a **pure consolidation** must leave the digest **byte-identical**;
+- a **pure consolidation** must leave the digest **byte-identical** - the
+  `diff` above prints nothing;
 - a **deliberate change** must produce a digest diff containing exactly the
   enumerated lines for that change, and nothing else.
+
+A diff you cannot account for line-by-line means the change touched more than
+it was meant to, even if the rendered page looks identical. An empty diff for
+a change you intended to make is the opposite failure: the digest is not
+seeing the change, and the check needs fixing before it is trusted for
+anything else.
 
 "It looks the same" is not a verification. See
 [`decisions/0002-one-definition-per-idea-in-css.md`](decisions/0002-one-definition-per-idea-in-css.md).
