@@ -48,7 +48,11 @@ jobs:
           printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H "$VPS_HOST" >> ~/.ssh/known_hosts
-          rsync -avz ./front/ "$VPS_USER@$VPS_HOST:$VPS_DEPLOY_PATH/front"
+          # --delete makes the server mirror the repo. Without it a renamed or removed
+          # file lingers forever: space-multi's deploy failed compiling a class and its
+          # rename side by side. Excluded paths are NOT deleted unless --delete-excluded
+          # is passed. Verified before enabling: this deploy path holds only source.
+          rsync -avz --delete ./front/ "$VPS_USER@$VPS_HOST:$VPS_DEPLOY_PATH/front"
           rsync -avz docker-compose.yml "$VPS_USER@$VPS_HOST:$VPS_DEPLOY_PATH/"
 
       - name: Deploy with Docker Compose
