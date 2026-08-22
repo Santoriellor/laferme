@@ -223,6 +223,20 @@ and the inert contact form
   meantime - webpack tree-shakes an unimported package out entirely, verified
   by `grep -c "react-router" build/static/js/main.*.js` returning `0`.
 
+- **`caniuse-lite` is roughly eight months stale.** Every build prints
+  `browsers data (caniuse-lite) is 8 months old`. It is left alone
+  deliberately, not overlooked. The browserslist data decides what Autoprefixer
+  emits, so refreshing it changes the produced CSS - which is precisely the
+  output that Tasks 6 to 11 verified byte by byte through
+  `front/scripts/css-digest.js`. Updating it inside this cycle would have moved
+  the baseline underneath the tasks whose whole argument rests on it.
+
+  It is safe to leave: the resolved production target set has `ios_saf
+  11.0-11.2` and `and_uc 15.5` as its oldest members and stale data errs toward
+  emitting *more* prefixes, never fewer. When it is updated, do it as a change
+  of its own, diff the digest, and expect the diff to be non-empty - that is the
+  point of doing it separately.
+
 ## Miscellaneous
 
 - **`Header.js:13` uses a document-relative image URL.** `src="laferme.png"`
