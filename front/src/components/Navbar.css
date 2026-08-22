@@ -68,6 +68,13 @@
   font-size: 30px;
   cursor: pointer;
   display: none;
+
+  /* The element used to be a <div>. These four declarations strip the
+     button defaults so nothing about it looks different. */
+  border: none;
+  background: none;
+  color: inherit;
+  padding: 0;
 }
 
 /* Responsive Styles */
@@ -83,14 +90,23 @@
     top: 100px;
     left: 0;
 
-    /* Clip-path hides the menu vertically */
+    /* Clip-path hides the menu vertically. On its own it hides the menu to the
+       eye only: the links stay in the DOM, stay focusable and stay announced,
+       so a keyboard visitor tabs through a menu they cannot see. visibility
+       takes them out of the tab order and out of the accessibility tree too.
+       The hide is delayed by the length of the wipe so the animation still
+       plays out; the show is immediate so the links are there from the first
+       frame. */
     clip-path: inset(0 0 100% 0);
-    transition: clip-path 0.4s ease-in-out;
+    visibility: hidden;
+    transition: clip-path 0.4s ease-in-out, visibility 0s linear 0.4s;
     z-index: 999;
   }
 
   .menu.open {
     clip-path: inset(0 0 0 0);
+    visibility: visible;
+    transition: clip-path 0.4s ease-in-out, visibility 0s linear 0s;
   }
 
   .toggle {

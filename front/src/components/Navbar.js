@@ -34,7 +34,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       {/* Full Menu for width > 1030px */}
-      {windowWidth > 1151 && (
+      {windowWidth >= 1151 && (
         <div className="menu">
           <button onClick={() => scrollToSection('fundraiser')}>{texts.menuHome}</button>
           <button onClick={() => scrollToSection('about-us')}>{texts.menuAboutUs}</button>
@@ -48,7 +48,7 @@ const Navbar = () => {
       )}
 
       {/* Dropdown Menu for width between 1150px and 1051px */}
-      {windowWidth <= 1150 && windowWidth > 1051 && (
+      {windowWidth <= 1150 && windowWidth >= 1051 && (
         <div className="menu">
           <button onClick={() => scrollToSection('fundraiser')}>{texts.menuHome}</button>
           <button onClick={() => scrollToSection('about-us')}>{texts.menuAboutUs}</button>
@@ -70,7 +70,7 @@ const Navbar = () => {
       )}
 
       {/* Dropdown Menu for width between 901 and 1050px */}
-      {windowWidth <= 1050 && windowWidth > 901 && (
+      {windowWidth <= 1050 && windowWidth >= 901 && (
         <div className="menu">
           <button onClick={() => scrollToSection('fundraiser')}>{texts.menuHome}</button>
           <button onClick={() => scrollToSection('about-us')}>{texts.menuAboutUs}</button>
@@ -92,7 +92,7 @@ const Navbar = () => {
       )}
 
       {/* Dropdown Menu for width between 768px and 900px */}
-      {windowWidth <= 900 && windowWidth > 768 && (
+      {windowWidth <= 900 && windowWidth >= 768 && (
         <div className="menu">
           <button onClick={() => scrollToSection('fundraiser')}>{texts.menuHome}</button>
           <button onClick={() => scrollToSection('about-us')}>{texts.menuAboutUs}</button>
@@ -114,7 +114,7 @@ const Navbar = () => {
       )}
 
       {/* Dropdown Menu for width between 675px and 767px */}
-      {windowWidth <= 767 && windowWidth > 675 && (
+      {windowWidth <= 767 && windowWidth >= 675 && (
         <div className="menu">
           <button onClick={() => scrollToSection('fundraiser')}>{texts.menuHome}</button>
           <button onClick={() => scrollToSection('about-us')}>{texts.menuAboutUs}</button>
@@ -150,9 +150,15 @@ const Navbar = () => {
           </div>
 
           {/* Hamburger icon */}
-          <div className="toggle" onClick={toggleMenu}>
+          <button
+            type="button"
+            className="toggle"
+            aria-label={texts.menuToggle}
+            aria-expanded={menuOpen}
+            onClick={toggleMenu}
+          >
             {menuOpen ? '✖' : '☰'}
-          </div>
+          </button>
         </>
       )}
     </nav>
