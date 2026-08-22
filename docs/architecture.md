@@ -9,9 +9,12 @@ compiles `front/src` into `front/build`, and an unprivileged nginx container
 serves that directory behind traefik.
 
 **There is no router.** `react-router-dom` is a dependency - `front/package.json`
-declares `^7.1.1`, and `package-lock.json` resolves 7.10.1 - but the only file
-that imports it is `front/src/components/TourCard.js`, which nothing imports in
-turn. `front/src/App.js` renders every section of the site at once,
+declares `^7.1.1`, and `package-lock.json` resolves 7.10.1 - but **nothing
+imports it**. Its last importer was `front/src/components/TourCard.js`, which
+was itself imported by nothing and was deleted; webpack tree-shakes the package
+out of the bundle entirely. It is kept deliberately, for the reason recorded in
+[`decisions/0004-deferred-findings.md`](decisions/0004-deferred-findings.md).
+`front/src/App.js` renders every section of the site at once,
 stacked inside a single `<main>`:
 
 ```
@@ -59,7 +62,6 @@ layout). Their stylesheets are still bundled, because the imports at the top of
 | `Carousel` | `front/src/components/Carousel.js` | Three auto-advancing slides, arrows, indicators |
 | `CarouselImage` | `front/src/components/CarouselImage.js` | One slide |
 | `Testimonials` | `front/src/pages/Testimonial.js` | Two opposite-direction marquee sliders |
-| `TourCard` | `front/src/components/TourCard.js` | Imported by nothing; the only importer of `react-router-dom` |
 | `LanguageProvider` | `front/src/context/LanguageContext.js` | Holds `language`, `texts`, `toggleLanguage` |
 
 Note the filename asymmetry: the testimonials component lives in

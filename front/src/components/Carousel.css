@@ -63,9 +63,14 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 
-  /* Was a <span>. These strip the button defaults. */
+  /* Was a <span>. These strip the button defaults. font-family is inherited
+     back for the same reason it is on .toggle: a button otherwise falls back to
+     the UA font stack. The dot is empty and sized in px, so nothing renders
+     differently today - this is here so that adding text or an em-relative
+     dimension later cannot silently change it. */
   border: none;
   padding: 0;
+  font-family: inherit;
 }
 
 .indicator.active {

@@ -105,8 +105,10 @@ and the inert contact form
   `#horse-riding{background:#fff}`. Both selectors were already unreachable -
   the sections they style are commented out of the render tree - so nothing
   visible changes; this entry exists only so the digest drop is not mistaken
-  for a lost or corrupted baseline the next time it is diffed. **625 lines is
-  the baseline from Task 10 onward.**
+  for a lost or corrupted baseline the next time it is diffed. **625 lines was
+  the baseline from Task 10 until Task 11.** Task 11 then changed CSS
+  deliberately - the accessibility fixes - and moved it again. **The current
+  baseline is 642 lines**, and that is the number to diff against.
 
 - **[in cycle] The fundraiser page's "Learn More" button is commented out.**
   `Fundraiser.js:56` has `{/* <button className="learn-btn">{texts.fundraiserLearnMore}</button> */}`.
@@ -241,6 +243,21 @@ and the inert contact form
   emitting *more* prefixes, never fewer. When it is updated, do it as a change
   of its own, diff the digest, and expect the diff to be non-empty - that is the
   point of doing it separately.
+
+- **The article cards are `<button>` elements containing flow content.**
+  `front/src/pages/Blog.js` renders a `<div>`, an `<h3>` and two `<p>` elements
+  inside each card button, while the HTML content model for `button` allows
+  phrasing content only. Nothing breaks: browsers lay it out correctly and
+  React's `validateDOMNesting` does not warn. The real consequence is that ARIA
+  gives a button presentational children, so the per-article `<h3>` titles drop
+  out of a screen reader's heading list - they survive as each button's
+  accessible name, which `Accessibility.test.js` asserts.
+
+  It stays as it is. This is still a clear improvement on the `<div onClick>` it
+  replaced, which was not reachable by keyboard at all. Doing it properly means
+  restructuring the card so the button wraps only the title, or replacing it
+  with a link once the site has routes - either is a design change rather than
+  an accessibility fix, and neither belongs in this cycle.
 
 ## Miscellaneous
 
