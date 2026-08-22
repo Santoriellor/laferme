@@ -6,7 +6,7 @@ import { LanguageContext } from '../context/LanguageContext';
 const Fundraiser = () => {
   const sectionRef = useRef(null);
   const [showFixedButton, setShowFixedButton] = useState(false);
-  const [raised, setRaised] = useState(1500);  // Amount raised so far
+  const raised = 1500;  // Amount raised so far
   const goal = 10000;  // Fundraising goal
   const progressPercentage = (raised / goal) * 100;
   const progressRef = useRef(null);

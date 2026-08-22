@@ -88,6 +88,21 @@ and the inert contact form
   intent to re-enable them; Task 10 removes only the unused imports that produce
   build warnings, leaving the components and their stylesheets in place.
 
+- **[in cycle] Removing those two unused imports also drops their CSS from the
+  compiled bundle.** `BikingTour.js` and `HorseRiding.js` stay on disk
+  unmodified, `BikingTour.css` and `HorseRiding.css` with them, but once
+  `App.js` no longer imports the two page components, nothing in the module
+  graph reaches those stylesheets either, so webpack stops including them in
+  `build/static/css`. This is a real change to the production CSS bundle from
+  a task that otherwise touches no CSS: `front/scripts/css-digest.js` on the
+  Task 9 baseline read 627 lines; after Task 10's import cleanup it reads 625,
+  short exactly `#biking-tour{background:#fff}` and
+  `#horse-riding{background:#fff}`. Both selectors were already unreachable -
+  the sections they style are commented out of the render tree - so nothing
+  visible changes; this entry exists only so the digest drop is not mistaken
+  for a lost or corrupted baseline the next time it is diffed. **625 lines is
+  the baseline from Task 10 onward.**
+
 - **[in cycle] The fundraiser page's "Learn More" button is commented out.**
   `Fundraiser.js:56` has `{/* <button className="learn-btn">{texts.fundraiserLearnMore}</button> */}`.
   Task 6 deletes `.learn-btn`'s CSS as dead code - nothing renders it, so the

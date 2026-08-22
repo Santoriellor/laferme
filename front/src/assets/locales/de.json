@@ -1,5 +1,4 @@
 {
-    "headerTitle_old": "Rette Le Canne",
     "headerTitle": "Wilkommen zur La Ferme",
     "menuHome": "Startseite",
     "menuAboutUs": "About Us",
@@ -9,9 +8,7 @@
     "menuTestimonials": "Erfahrungsberichte",
     "menuMore": "Mehr ▼",
 
-    "fundraiserTitle_old": "Rette mit Uns Le Canne",
     "fundraiserTitle": "Rette mit Uns La Ferme",
-    "fundraiserText_old": "Le Canne soll weiterhin als schönster Ferienort in der Toscana existieren.\nDiese Idee teilen wir wohl mit vielen Begeisterten ;). Da uns die finanziellen Mittel für den Kauf fehlen, sind wir auf eure Hilfe angewiesen. Nur gemeinsam können wir Le Canne retten. In Kürze findet ihr hier den Link zum Crowdfunding. Folgt uns auf euren Lieblingskanälen, um nichts zu verpassen!\nJede Spende zählt!",
     "fundraiserText": "Der Bauernhof muss weiterhin als das schönste Urlaubsziel in der Toskana bestehen.\nDiese Idee teilen wir wahrscheinlich mit vielen Gleichgesinnten ;).\n\n Nach dem Sturm im letzten Winter und den daraus entstandenen Schäden zählen wir auf eure Unterstützung.\nJede Spende zählt!",
     "fundraiserProgressGoalBefore": " von ",
     "fundraiserProgressGoalAfter": " Ziel",
@@ -31,5 +28,9 @@
     "testimonialsTitle": "Was die Leute über us sagen",
 
     "footerName": "Bauerhof Gästhaus La Ferme",
-    "footerRights": "Alle Rechte vorbehalten"
+    "footerRights": "Alle Rechte vorbehalten",
+
+    "carouselAltFarm": "Der Bauernhof und sein Gelände in der Toskana",
+    "carouselAltBike": "Eine geführte Radtour durch die toskanischen Hügel",
+    "carouselAltHorse": "Ausritt auf den Wegen rund um den Bauernhof"
 }

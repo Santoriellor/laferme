@@ -1,18 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import './Carousel.css';
 import CarouselImage from './CarouselImage.js';
 
-import farmImage from '../assets/images/farm-in-tuscany.jpg';
-import bikeImage from '../assets/images/bike-tour-tuscany.jpg';
-import horseImage from '../assets/images/horse-riding-tuscany.jpg';
+import { carouselSlides } from '../assets/data/carouselSlides';
+import { LanguageContext } from '../context/LanguageContext';
 
 const Carousel = () => {
-  const images = [
-    { src: farmImage, alt: 'Image 1', text: 'Text describing the general activities around the farm' },
-    { src: bikeImage, alt: 'Image 2', text: 'Text describing the biking activities around the farm' },
-    { src: horseImage, alt: 'Image 3', text: 'Text describing the horse riding activities around the farm' },
-    // Add more images as needed
-  ];
+  const { texts } = useContext(LanguageContext);
+  const images = carouselSlides;
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -62,11 +57,10 @@ const Carousel = () => {
       <div className="carousel-image-container">
         {images.map((image, index) => (
           <CarouselImage
-            key={index}
+            key={image.altKey}
             imageSrc={image.src}
-            altText={image.alt}
-            bottomText={image.text}
-            isActive={index === currentIndex} // Pass active state
+            altText={texts[image.altKey]}
+            isActive={index === currentIndex}
           />
         ))}
       </div>
