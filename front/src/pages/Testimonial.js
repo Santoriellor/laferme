@@ -20,7 +20,7 @@ const Testimonials = () => {
 
   return (
     <section id="testimonials">
-      <h1 className='testimonials-title'>{texts.testimonialsTitle}</h1>
+      <h2 className="testimonials-title">{texts.testimonialsTitle}</h2>
       
       {/* Top Slider - Right to Left */}
       <div className="slider-container">

@@ -78,11 +78,14 @@ const Carousel = () => {
       {/* Indicators */}
       <div className="carousel-indicators">
         {images.map((image, index) => (
-          <span
-            key={index}
+          <button
+            type="button"
+            key={image.altKey}
             className={`indicator ${index === currentIndex ? 'active' : ''}`}
+            aria-label={`${texts.carouselSlide} ${index + 1}`}
+            aria-current={index === currentIndex}
             onClick={() => goToSlide(index)}
-          ></span>
+          />
         ))}
       </div>
     </div>

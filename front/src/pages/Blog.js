@@ -34,25 +34,47 @@ const Blog = () => {
       return () => observer.disconnect(); // Cleanup
     }, []);
 
+  // Escape closes the article. Without this the only way out is the mouse,
+  // which strands a keyboard user inside the overlay.
+  useEffect(() => {
+    if (!selectedPost) return undefined;
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setSelectedPost(null);
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [selectedPost]);
+
   return (
     <section id="blog" ref={sectionRef}>
       <h2 className={`blog-title ${isVisible ? 'active' : ''}`}>{texts.blogTitle}</h2>
       <div className="blog-container">
         {newsData.map((post) => (
-          <div key={post.id} className="blog-card" onClick={() => setSelectedPost(post)}>
-          <img src={post.image} alt={post.title} className="blog-image" />
-          <div className="blog-info">
-            <h3>{post.title}</h3>
-            <p><i>{post.date}</i></p>
-            <p className="blog-preview">{post.content.slice(0, 100)}...</p>
-          </div>
-        </div>
+          <button
+            type="button"
+            key={post.id}
+            className="blog-card"
+            onClick={() => setSelectedPost(post)}
+          >
+            <img src={post.image} alt={post.title} className="blog-image" />
+            <div className="blog-info">
+              <h3>{post.title}</h3>
+              <p><i>{post.date}</i></p>
+              <p className="blog-preview">{post.content.slice(0, 100)}...</p>
+            </div>
+          </button>
         ))}
       </div>
 
       {selectedPost && (
         <div className="modal" onClick={() => setSelectedPost(null)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
+          <div
+            className="modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-label={selectedPost.title}
+            onClick={e => e.stopPropagation()}
+          >
             <button className="close-button" onClick={() => setSelectedPost(null)}>✖</button>
             <div className="modal-body">
               <img src={selectedPost.image} alt={selectedPost.title} />

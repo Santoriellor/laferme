@@ -40,7 +40,7 @@ const Fundraiser = () => {
     <section id="fundraiser" ref={sectionRef}>
       <div className="overlay">
         <div className="fundraiser-content">
-          <h1>{texts.fundraiserTitle}</h1>
+          <h2>{texts.fundraiserTitle}</h2>
           <p>{texts.fundraiserText}</p>
           
           <div className="progress-bar">
@@ -56,7 +56,7 @@ const Fundraiser = () => {
           {/* <button className="learn-btn">{texts.fundraiserLearnMore}</button> */}
         </div>
       </div>
-      <div class={`fixed-donate-btn-wrapper ${showFixedButton ? 'show' : ''}`}>
+      <div className={`fixed-donate-btn-wrapper ${showFixedButton ? 'show' : ''}`}>
         <button className="fixed-donate-btn">{texts.fundraiserDonateFixed}</button>
       </div>  
     </section>

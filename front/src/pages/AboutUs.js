@@ -37,7 +37,7 @@ const AboutUs = () => {
 
   return (
     <section id="about-us" ref={sectionRef}>
-      <h1 className={`about-title ${isVisible ? 'active' : ''}`}>{texts.menuAboutUs}</h1>
+      <h2 className={`about-title ${isVisible ? 'active' : ''}`}>{texts.menuAboutUs}</h2>
       <div className="about-container">
         {teamData.map((person, index) => (
           <div key={index} className={`our-team ${isVisible ? 'active' : ''}`}>
@@ -50,9 +50,21 @@ const AboutUs = () => {
                   </div>
               </div>
               <ul className="social-links">
-                <li><a href={person.socialLinks.twitter}><FontAwesomeIcon icon={faTwitter} /></a></li>
-                <li><a href={person.socialLinks.linkedin}><FontAwesomeIcon icon={faLinkedin} /></a></li>
-                <li><a href={person.socialLinks.facebook}><FontAwesomeIcon icon={faFacebook} /></a></li>
+                <li>
+                  <a href={person.socialLinks.twitter} aria-label={`${person.name} – Twitter`}>
+                    <FontAwesomeIcon icon={faTwitter} />
+                  </a>
+                </li>
+                <li>
+                  <a href={person.socialLinks.linkedin} aria-label={`${person.name} – LinkedIn`}>
+                    <FontAwesomeIcon icon={faLinkedin} />
+                  </a>
+                </li>
+                <li>
+                  <a href={person.socialLinks.facebook} aria-label={`${person.name} – Facebook`}>
+                    <FontAwesomeIcon icon={faFacebook} />
+                  </a>
+                </li>
               </ul>
           </div>
         ))}

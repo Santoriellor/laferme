@@ -27,6 +27,13 @@
     width: 30%;
     min-width: 250px;
     max-width: 350px;
+
+    /* Was a <div>. These strip the button defaults so the card is unchanged. */
+    border: none;
+    padding: 0;
+    text-align: left;
+    font: inherit;
+    color: inherit;
 }
 
 .blog-card:hover {

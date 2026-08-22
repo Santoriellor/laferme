@@ -16,6 +16,7 @@ const Header = () => {
       <div className="header-navbar">
         <select
           className="language-select"
+          aria-label={texts.languageLabel}
           value={language}
           onChange={(e) => toggleLanguage(e.target.value)}
         >
