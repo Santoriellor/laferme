@@ -88,6 +88,18 @@ and the inert contact form
   intent to re-enable them; Task 10 removes only the unused imports that produce
   build warnings, leaving the components and their stylesheets in place.
 
+- **The fundraiser amounts format with whatever locale the visitor's browser
+  resolves.** `Fundraiser.js:53` calls `toLocaleString()` on both the raised
+  amount and the goal with no locale argument, so the live site renders
+  different thousands separators to different visitors depending on their
+  browser's locale - a comma for an en-US browser, an apostrophe for a de-CH
+  one, and so on. That is a real inconsistency on a site whose copy is
+  otherwise controlled by `LanguageContext`: a French-language visitor on an
+  en-US browser gets English-style number grouping regardless of the language
+  they chose. It is deferred because fixing it means choosing which locale
+  drives the formatting - the `LanguageContext` language, or the browser - and
+  that choice is a product decision, not a refactor.
+
 ## Styling
 
 - **`--font2` names a font that is never loaded.** `App.css:13` declares

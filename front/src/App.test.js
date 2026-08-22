@@ -78,8 +78,12 @@ describe('the page shell', () => {
   it('shows the fundraiser progress against its goal', async () => {
     await renderApp();
     const goal = screen.getByText(/raised of/);
-    expect(goal).toHaveTextContent('1,500');
-    expect(goal).toHaveTextContent('10,000');
+    // Fundraiser.js:53 calls toLocaleString() with no locale, so the thousands
+    // separator is whatever the host resolves — a comma on CI (en-US), an
+    // apostrophe on a de-CH machine. \D? accepts any single separator, or none,
+    // so this pins the rendered amounts rather than the machine's locale.
+    expect(goal).toHaveTextContent(/\$1\D?500\b/);
+    expect(goal).toHaveTextContent(/\$10\D?000\b/);
   });
 
   it('offers both donate buttons', async () => {
