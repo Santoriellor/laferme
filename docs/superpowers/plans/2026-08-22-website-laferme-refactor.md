@@ -916,6 +916,37 @@ git commit -m "build: add a CSS digest tool so stylesheet changes can be proved 
 
 ### Task 6: Delete the dead stylesheets and dead rules
 
+> **ADDED BEFORE EXECUTION — the test suite is provably blind to everything this
+> task does. Verify with a build diff instead.**
+>
+> The Phase B reviewer deleted `global.css`, `styles.css` and `test.css` AND
+> emptied two live stylesheets (`Navbar.css`, `AboutUs.css`), then ran the
+> suite: 3 suites / 22 tests, all green. jsdom applies no stylesheet CSS, so no
+> test in this stack can see a layout, animation, breakpoint, `clip-path` or
+> token regression. Do not treat a green suite as evidence for this task.
+>
+> The mechanical check that does work, run before and after your change:
+>
+> ```bash
+> cd front && npx react-scripts build
+> cp build/static/css/*.css /tmp/css-before.css      # before your edit
+> # ...make the change...
+> npx react-scripts build
+> diff /tmp/css-before.css build/static/css/*.css
+> ```
+>
+> **Deleting a genuinely dead stylesheet must produce a zero diff.** A non-zero
+> diff disproves the "nothing imports it" premise mechanically, and you stop.
+> For consolidation tasks the diff will not be empty, so read every hunk and
+> confirm each one is a rule you meant to move — the duplicated `@keyframes`
+> live in both `global.css` and the per-page files, and consolidating the wrong
+> copy is invisible to CI.
+>
+> The premise was independently re-confirmed on 2026-08-22: `grep -rn
+> "import.*\.css" front/src` lists 15 imports and none of the three dead files;
+> no CSS `@import` references them; `front/public/index.html` has no
+> `<link rel=stylesheet>`; nothing `require()`s CSS.
+
 **Files:**
 - Delete: `front/src/assets/css/global.css`, `front/src/styles.css`, `front/src/pages/test.css`
 - Modify: `front/src/App.css`, `front/src/components/CarouselImage.css`, `front/src/components/CarouselImage.js`, `front/src/pages/Fundraiser.css`, `front/src/pages/Showcase.css`
@@ -1056,6 +1087,37 @@ git commit -m "refactor(css): delete three unimported stylesheets and five unrea
 ```
 
 ### Task 7: One definition of each animation
+
+> **ADDED BEFORE EXECUTION — the test suite is provably blind to everything this
+> task does. Verify with a build diff instead.**
+>
+> The Phase B reviewer deleted `global.css`, `styles.css` and `test.css` AND
+> emptied two live stylesheets (`Navbar.css`, `AboutUs.css`), then ran the
+> suite: 3 suites / 22 tests, all green. jsdom applies no stylesheet CSS, so no
+> test in this stack can see a layout, animation, breakpoint, `clip-path` or
+> token regression. Do not treat a green suite as evidence for this task.
+>
+> The mechanical check that does work, run before and after your change:
+>
+> ```bash
+> cd front && npx react-scripts build
+> cp build/static/css/*.css /tmp/css-before.css      # before your edit
+> # ...make the change...
+> npx react-scripts build
+> diff /tmp/css-before.css build/static/css/*.css
+> ```
+>
+> **Deleting a genuinely dead stylesheet must produce a zero diff.** A non-zero
+> diff disproves the "nothing imports it" premise mechanically, and you stop.
+> For consolidation tasks the diff will not be empty, so read every hunk and
+> confirm each one is a rule you meant to move — the duplicated `@keyframes`
+> live in both `global.css` and the per-page files, and consolidating the wrong
+> copy is invisible to CI.
+>
+> The premise was independently re-confirmed on 2026-08-22: `grep -rn
+> "import.*\.css" front/src` lists 15 imports and none of the three dead files;
+> no CSS `@import` references them; `front/public/index.html` has no
+> `<link rel=stylesheet>`; nothing `require()`s CSS.
 
 **Files:**
 - Create: `front/src/assets/css/animations.css`
@@ -1219,6 +1281,37 @@ git commit -m "refactor(css): give every animation exactly one definition"
 
 ### Task 8: One definition of each design token
 
+> **ADDED BEFORE EXECUTION — the test suite is provably blind to everything this
+> task does. Verify with a build diff instead.**
+>
+> The Phase B reviewer deleted `global.css`, `styles.css` and `test.css` AND
+> emptied two live stylesheets (`Navbar.css`, `AboutUs.css`), then ran the
+> suite: 3 suites / 22 tests, all green. jsdom applies no stylesheet CSS, so no
+> test in this stack can see a layout, animation, breakpoint, `clip-path` or
+> token regression. Do not treat a green suite as evidence for this task.
+>
+> The mechanical check that does work, run before and after your change:
+>
+> ```bash
+> cd front && npx react-scripts build
+> cp build/static/css/*.css /tmp/css-before.css      # before your edit
+> # ...make the change...
+> npx react-scripts build
+> diff /tmp/css-before.css build/static/css/*.css
+> ```
+>
+> **Deleting a genuinely dead stylesheet must produce a zero diff.** A non-zero
+> diff disproves the "nothing imports it" premise mechanically, and you stop.
+> For consolidation tasks the diff will not be empty, so read every hunk and
+> confirm each one is a rule you meant to move — the duplicated `@keyframes`
+> live in both `global.css` and the per-page files, and consolidating the wrong
+> copy is invisible to CI.
+>
+> The premise was independently re-confirmed on 2026-08-22: `grep -rn
+> "import.*\.css" front/src` lists 15 imports and none of the three dead files;
+> no CSS `@import` references them; `front/public/index.html` has no
+> `<link rel=stylesheet>`; nothing `require()`s CSS.
+
 **Files:**
 - Create: `front/src/assets/css/tokens.css`
 - Modify: `front/src/index.js`, `front/src/App.css`
@@ -1361,6 +1454,37 @@ git commit -m "refactor(css): move the tokens into one file and use them"
 ```
 
 ### Task 9: One definition of the section shell and the section title
+
+> **ADDED BEFORE EXECUTION — the test suite is provably blind to everything this
+> task does. Verify with a build diff instead.**
+>
+> The Phase B reviewer deleted `global.css`, `styles.css` and `test.css` AND
+> emptied two live stylesheets (`Navbar.css`, `AboutUs.css`), then ran the
+> suite: 3 suites / 22 tests, all green. jsdom applies no stylesheet CSS, so no
+> test in this stack can see a layout, animation, breakpoint, `clip-path` or
+> token regression. Do not treat a green suite as evidence for this task.
+>
+> The mechanical check that does work, run before and after your change:
+>
+> ```bash
+> cd front && npx react-scripts build
+> cp build/static/css/*.css /tmp/css-before.css      # before your edit
+> # ...make the change...
+> npx react-scripts build
+> diff /tmp/css-before.css build/static/css/*.css
+> ```
+>
+> **Deleting a genuinely dead stylesheet must produce a zero diff.** A non-zero
+> diff disproves the "nothing imports it" premise mechanically, and you stop.
+> For consolidation tasks the diff will not be empty, so read every hunk and
+> confirm each one is a rule you meant to move — the duplicated `@keyframes`
+> live in both `global.css` and the per-page files, and consolidating the wrong
+> copy is invisible to CI.
+>
+> The premise was independently re-confirmed on 2026-08-22: `grep -rn
+> "import.*\.css" front/src` lists 15 imports and none of the three dead files;
+> no CSS `@import` references them; `front/public/index.html` has no
+> `<link rel=stylesheet>`; nothing `require()`s CSS.
 
 **Files:**
 - Create: `front/src/assets/css/sections.css`
@@ -1770,6 +1894,28 @@ git commit -m "refactor: delete dead code and move the carousel's content into a
 ```
 
 ### Task 11: Accessibility baseline
+
+> **ADDED BEFORE EXECUTION — prove the hamburger change with a test, because the
+> class selector cannot.**
+>
+> The Phase B reviewer converted `Navbar.js`'s `<div className="toggle">` into
+> `<button className="toggle" aria-label="Menu">` and the suite stayed green:
+> `Navbar.test.js` queries `.toggle` by class, so nothing distinguishes before
+> from after and this task would "pass" whether or not it worked.
+>
+> So write the assertion red-first, as part of this task: the toggle must be
+> reachable as `getByRole('button', { name: /menu/i })` and must respond to
+> keyboard activation, not only to `fireEvent.click`. Watch it fail against
+> today's `<div>`, then make it pass. Do **not** add this test earlier — Phase B
+> must end with a green suite, because the suite gates the deploy of a live
+> host.
+>
+> One collision to avoid: `Content.test.js` selects the article modal's close
+> control with `getByRole('button', { name: '✖' })`, and the toggle also renders
+> `✖` when open. They do not collide today because the toggle only exists at
+> widths <= 674 while that test runs at the default 1024. If you change the
+> toggle's accessible name or the breakpoint, re-run the full suite and check
+> that selector still resolves to exactly one element.
 
 > **ADDED BEFORE EXECUTION — five window widths render no navigation at all.**
 >
