@@ -146,15 +146,3 @@
 @media only screen and (max-width: 990px){
     .our-team{ margin-bottom: 20px; }
 }
-
-/* Slide-in Animations */
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-100px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
