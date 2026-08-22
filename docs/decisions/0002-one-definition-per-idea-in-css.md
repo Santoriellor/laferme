@@ -15,7 +15,9 @@ files import a stylesheet; none of them names these three. `test.css` is a
 discarded experiment that restyles `#fundraiser` with `color: #af1a1a` and
 `height: 800px`, values that appear nowhere else in the project. Reading
 `global.css` to understand a style is reading a file that has no effect on the
-page.
+page. Task 6 confirmed this mechanically: with the three files deleted, the
+built CSS bundle and its digest were byte-identical to the pre-deletion
+baseline, before any of the five dead-rule removals that followed.
 
 **`@keyframes slideInLeft` is declared seven times, and only one of them
 runs.** Four are in live stylesheets - `Fundraiser.css:159`, `AboutUs.css:151`

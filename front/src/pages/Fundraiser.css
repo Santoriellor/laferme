@@ -71,7 +71,7 @@
   margin-bottom: 20px;
 }
   
-.donate-btn, .learn-btn {
+.donate-btn {
   padding: 12px 25px;
   border: none;
   margin: 10px;
@@ -88,17 +88,6 @@
 
 .donate-btn:hover {
   transform: scale(1.1);
-}
-
-.learn-btn {
-  background-color: transparent;
-  border: 2px solid #fff;
-  color: #fff;
-}
-
-.learn-btn:hover {
-  background-color: #fff;
-  color: #000;
 }
 
 .fixed-donate-btn-wrapper {

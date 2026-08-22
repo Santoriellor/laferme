@@ -13,7 +13,7 @@
   --font2: "Quintessential", sans-serif;
 }
 
-#root, .App, main {
+#root, main {
   display: block;
   width: 100%;
 }

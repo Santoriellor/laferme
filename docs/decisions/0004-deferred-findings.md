@@ -88,6 +88,17 @@ and the inert contact form
   intent to re-enable them; Task 10 removes only the unused imports that produce
   build warnings, leaving the components and their stylesheets in place.
 
+- **[in cycle] The fundraiser page's "Learn More" button is commented out.**
+  `Fundraiser.js:56` has `{/* <button className="learn-btn">{texts.fundraiserLearnMore}</button> */}`.
+  Task 6 deletes `.learn-btn`'s CSS as dead code - nothing renders it, so the
+  rule was unreachable - but leaves the commented-out button itself alone: the
+  comment records the same kind of intent as `BikingTour` and `HorseRiding`
+  above, `Fundraiser.js` is not in Task 6's file list, and removing dead JSX is
+  Task 10's job. This differs from `CarouselImage.js`, where Task 6 does
+  delete a commented-out block - there the surrounding CSS block it referenced
+  (`.carousel-bottom-text`) was deleted in the same task, so the comment and
+  the rule it depended on left together.
+
 - **The fundraiser amounts format with whatever locale the visitor's browser
   resolves.** `Fundraiser.js:53` calls `toLocaleString()` on both the raised
   amount and the goal with no locale argument, so the live site renders
