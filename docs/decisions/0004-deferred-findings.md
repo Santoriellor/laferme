@@ -161,23 +161,56 @@ and the inert contact form
 ## Accessibility
 
 - **[in cycle] The mobile menu is hidden with `clip-path` alone.**
-  `front/src/components/Navbar.css:74-99` is the `@media (max-width: 674px)`
-  block; inside it, `.menu` carries `clip-path: inset(0 0 100% 0)` (line 87) and
-  `.menu.open` carries `clip-path: inset(0 0 0 0)` (line 93). `clip-path` clips
-  painting only. It does not remove the element from the accessibility tree and
-  it does not take anything out of the tab order, so while the hamburger menu
-  looks closed, all six of its links remain focusable and screen-reader
-  announced. A keyboard visitor tabs through a menu they cannot see. **This is
-  fixed in Task 11 of this cycle**, which is why it appears here as a recorded
-  finding rather than an open one - but it is written down because the fix has
-  to survive: any future "just hide it with `clip-path`" is the same bug again.
+  `front/src/components/Navbar.css:81-115` is the `@media (max-width: 674px)`
+  block; inside it, `.menu` carried `clip-path: inset(0 0 100% 0)` and
+  `.menu.open` carried `clip-path: inset(0 0 0 0)`, and nothing else. `clip-path`
+  clips painting only. It does not remove the element from the accessibility
+  tree and it does not take anything out of the tab order, so while the
+  hamburger menu looked closed, all six of its links remained focusable and
+  screen-reader announced. A keyboard visitor tabbed through a menu they could
+  not see. **Task 11 of this cycle fixed it**, which is why it appears here as a
+  recorded finding rather than an open one: `.menu` now also carries
+  `visibility: hidden` and `.menu.open` `visibility: visible`, with the hide
+  delayed by the length of the wipe (`visibility 0s linear 0.4s`) so the
+  animation still plays and the show instant (`0s linear 0s`) so the links are
+  available from the first frame. It is written down because the fix has to
+  survive: any future "just hide it with `clip-path`" is the same bug again.
+  Note that no JavaScript test can defend it - jsdom applies no stylesheet CSS,
+  so a `.menu.open` class assertion passes either way. It is verified by reading
+  `front/build/static/css`.
+
+- **The carousel advances on its own and cannot be stopped.**
+  `front/src/components/Carousel.js:69-75` sets a three-second interval that
+  moves to the next slide. It pauses on `mouseenter` and resumes on
+  `mouseleave`, which is not a control: it is unreachable from the keyboard,
+  unreachable on a touch screen, and it does not survive a page the visitor is
+  not hovering. WCAG 2.2.2 (Pause, Stop, Hide) requires a mechanism to pause
+  any motion that starts automatically, lasts more than five seconds and is
+  presented alongside other content. Task 11 does not add one: a pause control
+  is a visible new control with its own label, its own icon and its own place
+  in the layout, which is a design decision rather than an accessibility fix
+  applied to what is already there.
+
+- **`.our-team .description` cannot be measured statically.**
+  `front/src/pages/AboutUs.css:93-99` renders the description in
+  `var(--colorwhite)` over `.our-team .over-layer`
+  (`front/src/pages/AboutUs.css:57-64`), which is `rgba(0, 0, 0, 0.4)` laid
+  over each team member's photograph. The effective background is therefore
+  40% black over whatever pixels that particular photograph has underneath, so
+  the contrast ratio is different for every member and different in every part
+  of the same card - it cannot be computed from the stylesheet at all, and a
+  light photograph will fail. Guaranteeing it means a solid scrim, or a much
+  darker overlay, behind the text. That changes how the section looks, which
+  puts it outside a baseline task whose other fixes are all invisible.
 
 - **`Blog.js:54`'s modal has no focus trap and does not restore focus on
-  close.** Task 11 gives it a dialog role and an Escape key, which is the
-  majority of the value for a fraction of the machinery, but it does not add a
+  close.** Task 11 gave it a dialog role and an Escape key, which is the
+  majority of the value for a fraction of the machinery, but it did not add a
   full focus trap: focus can still leave the open dialog by tabbing, and closing
   it does not return focus to the card that opened it. A correct focus trap is a
-  component of its own and is deferred.
+  component of its own and is deferred. The card is now a `<button>`, so the
+  focus that would need restoring is a real, reachable focus for the first
+  time.
 
 ## Miscellaneous
 
