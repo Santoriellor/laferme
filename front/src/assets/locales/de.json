@@ -1,5 +1,6 @@
 {
     "headerTitle": "Wilkommen zur La Ferme",
+    "languageLabel": "Sprache",
     "menuHome": "Startseite",
     "menuAboutUs": "About Us",
     "menuContact": "Kontact",
@@ -7,6 +8,7 @@
     "menuGallery": "Impressionen",
     "menuTestimonials": "Erfahrungsberichte",
     "menuMore": "Mehr ▼",
+    "menuToggle": "Menü",
 
     "fundraiserTitle": "Rette mit Uns La Ferme",
     "fundraiserText": "Der Bauernhof muss weiterhin als das schönste Urlaubsziel in der Toskana bestehen.\nDiese Idee teilen wir wahrscheinlich mit vielen Gleichgesinnten ;).\n\n Nach dem Sturm im letzten Winter und den daraus entstandenen Schäden zählen wir auf eure Unterstützung.\nJede Spende zählt!",
@@ -30,6 +32,7 @@
     "footerName": "Bauerhof Gästhaus La Ferme",
     "footerRights": "Alle Rechte vorbehalten",
 
+    "carouselSlide": "Bild",
     "carouselAltFarm": "Der Bauernhof und sein Gelände in der Toskana",
     "carouselAltBike": "Eine geführte Radtour durch die toskanischen Hügel",
     "carouselAltHorse": "Ausritt auf den Wegen rund um den Bauernhof"

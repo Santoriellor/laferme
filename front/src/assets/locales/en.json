@@ -1,5 +1,6 @@
 {
     "headerTitle": "Welcome to La Ferme",
+    "languageLabel": "Language",
     "menuHome": "Home",
     "menuAboutUs": "About Us",
     "menuContact": "Contact",
@@ -7,6 +8,7 @@
     "menuGallery": "Gallery",
     "menuTestimonials": "Testimonials",
     "menuMore": "More ▼",
+    "menuToggle": "Menu",
 
     "fundraiserTitle": "Help Us Save La Ferme",
     "fundraiserText": "The farm must continue to exist as the most beautiful holiday destination in Tuscany.\nWe probably share this idea with many passionate people ;).\n\nAfter last winter's storm and the resulting damage, we are counting on your support.\nEvery donation counts!",
@@ -30,6 +32,7 @@
     "footerName": "Guesthouse La Ferme",
     "footerRights": "All Rights Reserved",
 
+    "carouselSlide": "Slide",
     "carouselAltFarm": "The farmhouse and its grounds in Tuscany",
     "carouselAltBike": "A guided bike tour through the Tuscan hills",
     "carouselAltHorse": "Horse riding on the trails around the farm"
