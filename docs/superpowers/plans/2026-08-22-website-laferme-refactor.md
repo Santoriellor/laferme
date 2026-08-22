@@ -167,6 +167,33 @@ Colour contrast against white text, computed with the WCAG relative-luminance fo
 
 ### Task 1: Documentation set and ADRs
 
+> **ADDED BEFORE EXECUTION — the site is a demo, and ADR 0003 must say so.**
+>
+> `docs/decisions/0003-contact-form-has-no-destination.md` is specified on the
+> assumption that the contact form silently discarding messages is a defect
+> awaiting a destination. **It is not.** The owner has confirmed this site is a
+> **fake** — a portfolio piece, not a real business — so there is no inbox for the
+> form to reach and none is wanted.
+>
+> That changes the ADR from an open problem to a recorded design fact. Write it as:
+>
+> - **Status: Accepted.** The form is intentionally inert.
+> - **Context:** `front/src/pages/Contact.js` renders a `<form>` with no `action`,
+>   no `method`, no `onSubmit`, and no `name` attribute on any input. Submitting
+>   performs a native GET to the same URL and discards the input. The `required`
+>   attributes still run browser validation, so it *looks* like it submits.
+> - **Decision:** leave it inert. The site represents a fictional business; wiring
+>   it to a real endpoint would create a mailbox nobody reads.
+> - **Consequences:** be explicit that **if this site is ever used for a real
+>   business, this becomes a live defect** — visitors would believe they had made
+>   contact. Name what would need to change: an `action`/`method` (the sibling
+>   `santoriello.ch` uses Web3Forms) or an `onSubmit` handler, plus `name`
+>   attributes on the three inputs, which currently have none and would otherwise
+>   submit empty fields.
+>
+> Do **not** change `Contact.js` in this cycle. This is documentation only.
+
+
 **Files:**
 - Create: `docs/architecture.md`, `docs/design.md`, `docs/technical.md`, `docs/runbook.md`
 - Create: `docs/decisions/0001-create-react-app-stays.md`, `docs/decisions/0002-one-definition-per-idea-in-css.md`, `docs/decisions/0003-contact-form-has-no-destination.md`, `docs/decisions/0004-deferred-findings.md`
@@ -1744,6 +1771,39 @@ git commit -m "refactor: delete dead code and move the carousel's content into a
 
 ### Task 11: Accessibility baseline
 
+> **ADDED BEFORE EXECUTION — the closed mobile menu is reachable, and the plan does not list it.**
+>
+> `front/src/components/Navbar.css:74-95` hides the menu with `clip-path` alone:
+>
+> ```css
+> @media (max-width: 674px) {
+>   .menu      { clip-path: inset(0 0 100% 0); transition: clip-path 0.4s ease-in-out; }
+>   .menu.open { clip-path: inset(0 0 0 0); }
+> }
+> ```
+>
+> `clip-path` hides content **visually only**. The links stay in the DOM, stay
+> focusable and stay exposed to assistive technology — so on a phone with the menu
+> closed, tabbing moves focus into invisible links and a screen reader announces
+> navigation that is not presented as open.
+>
+> This is byte-for-byte the same defect found and fixed in the sibling
+> `santoriello.ch` repo, comment included — the two sites share a template. The fix
+> applied there, which works and is verified:
+>
+> ```css
+> .menu      { …; visibility: hidden;  transition: clip-path 0.4s ease-in-out, visibility 0s linear 0.4s; }
+> .menu.open { …; visibility: visible; transition: clip-path 0.4s ease-in-out, visibility 0s linear 0s; }
+> ```
+>
+> The hide is **delayed** to match the animation so the wipe-out still plays; the
+> show is **instant** so the links are available from the first frame. Match the
+> delay to this file's own duration — read it, do not assume 0.4s.
+>
+> Note the JS tests cannot see any of this: jsdom applies no stylesheet CSS, so
+> `.menu.open` class assertions pass either way. Verify by reading the built CSS.
+
+
 A deliberate behaviour change, so every test here asserts the corrected behaviour and fails before the fix. None of it is pinned by a characterization test — the same reasoning Spec D8 applies to security defects applies here: a characterization test that pinned five `<h1>` elements would make the deploy gate defend them.
 
 **Files:**
@@ -2388,6 +2448,56 @@ git commit -m "security: drop the unused react-fontawesome and cra-template depe
 ```
 
 ### Task 13: Prettier, ESLint and the formatter sweep
+
+> **ADDED BEFORE EXECUTION — gate the formatters, and declare both tools.**
+>
+> **1. Gate them.** As written this task adopts Prettier and ESLint but runs them
+> nowhere automatic, so formatting drifts back and the sweep's value decays. Add
+> two steps to the **`test` job** of `.github/workflows/deploy.yml`, in the commit
+> that records `.git-blame-ignore-revs`:
+>
+> ```yaml
+>       - name: Check formatting
+>         working-directory: front
+>         run: npx prettier --check "src/**/*.{js,jsx,css,json}"
+>
+>       - name: Lint
+>         working-directory: front
+>         run: npx eslint src --max-warnings 0
+> ```
+>
+> Adjust globs and flags to what this repo actually needs — the point is the gate.
+>
+> **2. Declare BOTH tools as pinned devDependencies.** This task's Interfaces block
+> says ESLint is "already present via `react-scripts`". That is true and it is not
+> enough: CI runs `npm ci`, which installs only *declared* dependencies, so a gate
+> invoking `npx eslint` relies on transitive hoisting and `npx` will silently fetch
+> from the registry if that ever changes. The sibling `santoriello.ch` cycle hit
+> exactly this and had to fix it in a follow-up. Do it right here:
+>
+> ```bash
+> cd front && npm install --save-dev --save-exact prettier@3.4.2 eslint@8.57.1
+> ```
+>
+> Pin ESLint to the version already resolving transitively — this is declaring
+> existing behaviour, **not** an upgrade. Do **not** move to ESLint 9, which needs
+> flat config.
+>
+> **Three constraints:**
+>
+> 1. **Run both locally and confirm they pass before committing.** This is the
+>    commit that makes a lint failure block deployment of a live site.
+> 2. **Touch only the `test` job.** The `deploy` job's first rsync carries
+>    `--delete` on the `./front/` transfer, added recently to fix a broken deploy.
+>    The **second** rsync, whose source is the single file `docker-compose.yml`,
+>    must never gain `--delete` — its source is one file, so rsync would treat
+>    everything else in the destination as extraneous and delete it, `front/`
+>    included.
+> 3. **Do not add `plugin:jsx-a11y/recommended`** or any rule set promoting
+>    existing warnings to errors. This project builds with three pre-existing
+>    `no-unused-vars` warnings and only succeeds because the Dockerfile does not set
+>    `CI`; `CI=true` makes `react-scripts build` treat warnings as errors.
+
 
 Deliberately last: running it earlier would mix reformatting into every review diff above.
 
