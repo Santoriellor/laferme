@@ -62,7 +62,7 @@ construct on mount.
 Two more things about this jsdom environment are worth knowing before writing a
 test:
 
-- `window.innerWidth` is **1024**, so `Navbar` renders exactly one of its five
+- `window.innerWidth` is **1024**, so `Navbar` renders exactly one of its six
   branches - the `<= 1050 && > 901` one.
 - `window.scrollTo` is not implemented by jsdom and must be stubbed before any
   test that triggers navigation.

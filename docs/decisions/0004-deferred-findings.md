@@ -9,11 +9,21 @@ problems found while documenting and surveying the site that are real, but that
 this cycle does not fix. Each entry says what it is, where it is, and in one
 line why it is not being fixed now.
 
-It does **not** list problems that *are* scheduled inside this cycle - the dead
-stylesheets (Task 6), the duplicated animations, tokens and section shells
-(Tasks 7-9), the dead JavaScript and hard-coded carousel content (Task 10), the
-accessibility baseline (Task 11), or the unimported dependencies (Task 12).
-Those are in progress, not deferred.
+As a rule it does **not** list problems that *are* scheduled inside this cycle
+- the dead stylesheets (Task 6), the duplicated animations, tokens and section
+shells (Tasks 7-9), the dead JavaScript and hard-coded carousel content (Task
+10), the accessibility baseline (Task 11), or the unimported dependencies (Task
+12). Those are in progress, not deferred, and they do not need a register.
+
+**The exception, and the only one:** an in-cycle item appears here when the
+entry carries something the fix alone would not - a measurement that would
+otherwise be rediscovered from scratch, or a rule that has to outlive the
+commit that satisfies it. Two entries below are of that kind, and both are
+marked **[in cycle]** so nobody mistakes them for outstanding work: the
+call-to-action contrast ratios, which record the decision *not* to change the
+brand colour along with the numbers that decision was made against, and the
+`clip-path` mobile menu, whose entry exists so that the same mistake is
+recognised the next time somebody reaches for `clip-path` to hide something.
 
 Two findings have ADRs of their own rather than a line here: the unmaintained
 build tool ([`0001-create-react-app-stays.md`](0001-create-react-app-stays.md))
@@ -61,18 +71,16 @@ and the inert contact form
 
 ## Structure
 
-- **`Navbar` picks its layout in JavaScript.** `Navbar.js` chooses between five
+- **`Navbar` picks its layout in JavaScript.** `Navbar.js` chooses between six
   mutually exclusive menus from `window.innerWidth` rather than in media
   queries, so the menu does not respond to a viewport change until a `resize`
   event fires, and the same six labels are written out six times. Restructuring
   it into CSS is a rewrite, not a refactor.
 
-- **The `Navbar` breakpoints leave gaps at their own boundaries.** Each branch
-  reads `<= upper && > lower` while the next starts at `<= lower - 1`, so the
-  widths 675, 768, 901, 1051 and 1151 match no branch and the navbar renders no
-  menu at all. Closing the gaps is a one-character change per branch but it
-  changes rendered output at five specific widths, so it belongs with the
-  rewrite above rather than in a consolidation task.
+  Note that the five uncovered widths those six branches leave - 675, 768, 901,
+  1051 and 1151, where the navbar renders no menu at all - are **not** deferred:
+  Task 11 closes those gaps. It is the six-branches-in-JavaScript structure
+  itself that is deferred, and it survives that fix untouched.
 
 - **`BikingTour` and `HorseRiding` stay in the tree.** Their JSX is commented
   out at `App.js:30-31` and their menu entries at `Navbar.js:44-45` and in each
@@ -94,8 +102,8 @@ and the inert contact form
   request to a third party from every visit - a privacy improvement, and one
   outside this cycle.
 
-- **Colour contrast on the three call-to-action buttons.** Measured with the
-  WCAG relative-luminance formula against the white text on each:
+- **[in cycle] Colour contrast on the three call-to-action buttons.** Measured
+  with the WCAG relative-luminance formula against the white text on each:
 
   | Element | Colour | Ratio | AA (4.5:1) |
   |---|---|---|---|
@@ -103,16 +111,18 @@ and the inert contact form
   | `.contact-form button` (`Contact.css:67`, `var(--color2)`) | `rgb(182, 115, 50)` | **3.83:1** | fails |
   | `.fixed-donate-btn` (`Fundraiser.css:120`) | `#e63946` | **4.17:1** | fails |
 
-  The accent colour itself is **not** changed. It is the site's brand colour and
-  stays exactly as it is; this entry records the measured ratios so the finding
-  is not rediscovered. Task 11 brings these three controls to AA without
-  redefining the token, and no colour value in `tokens.css` changes as part of
-  the CSS consolidation
+  Task 11 brings these three controls to AA, so the failures themselves are not
+  deferred. What is recorded here is the **decision underneath the fix**: the
+  accent colour is the site's brand colour and is **not** changed - not by Task
+  11, and not by the CSS consolidation, where no colour value in `tokens.css`
+  changes at all
   ([`0002-one-definition-per-idea-in-css.md`](0002-one-definition-per-idea-in-css.md)).
+  The three ratios are written down beside it so that the next person to
+  question the accent colour can see it was measured, not overlooked.
 
-## Accessibility not covered by Task 11
+## Accessibility
 
-- **The mobile menu is hidden with `clip-path` alone.**
+- **[in cycle] The mobile menu is hidden with `clip-path` alone.**
   `front/src/components/Navbar.css:74-99` is the `@media (max-width: 674px)`
   block; inside it, `.menu` carries `clip-path: inset(0 0 100% 0)` (line 87) and
   `.menu.open` carries `clip-path: inset(0 0 0 0)` (line 93). `clip-path` clips

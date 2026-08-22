@@ -32,10 +32,26 @@ same is true of `slideInRight`, declared twice in live stylesheets
 (`Fundraiser.css:169` at `100px`, `Contact.css:98` at `100%`). Nobody chose
 this. It is what the cascade decided, and no file says so.
 
-**White is written four ways.** Outside the token declaration there are 20
-literal white values across 9 live stylesheets - `#fff` twelve times, `white`
-seven times, `#ffffff` once - alongside 10 uses of the `var(--colorwhite)`
-token that exists precisely to avoid that. Black-with-alpha appears 17 times
+**White is written four ways.** The count that the consolidation tasks work
+from is produced by this grep, run over the 15 live stylesheets:
+
+```bash
+grep -rn "#fff\b\|#ffffff\|: white\|background-color: white" src --include=*.css
+```
+
+It returns 20 lines, one of which is the `--colorwhite: white` token
+declaration itself at `App.css:10`. That leaves **19 literal white values
+across 9 live stylesheets** - `#fff` twelve times, `white` six times,
+`#ffffff` once - alongside 10 uses of the `var(--colorwhite)` token that exists
+precisely to avoid them.
+
+One further literal white sits outside that pattern and is deliberately
+excluded: `Blog.css:85`, `background: linear-gradient(transparent, white)`. A
+gradient stop is not a flat colour and substituting a token there is not the
+same edit, so the consolidation leaves it alone; a wider `\bwhite\b` search
+will report 20 rather than 19 because of it.
+
+Black-with-alpha appears 17 times
 with nine distinct alphas, in two different spacings (`rgba(0, 0, 0, 0.4)` and
 `rgba(0,0,0,0.4)`); `rgba(0, 0, 0, 0.1)` alone appears four times, in
 `Footer.css`, `Header.css`, `Blog.css` and `Testimonials.css`. Two declared

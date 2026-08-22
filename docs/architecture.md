@@ -8,9 +8,10 @@ no database and no server-side code in this repository. Create React App
 compiles `front/src` into `front/build`, and an unprivileged nginx container
 serves that directory behind traefik.
 
-**There is no router.** `react-router-dom@7.1.1` is a dependency, but the only
-file that imports it is `front/src/components/TourCard.js`, which nothing
-imports in turn. `front/src/App.js` renders every section of the site at once,
+**There is no router.** `react-router-dom` is a dependency - `front/package.json`
+declares `^7.1.1`, and `package-lock.json` resolves 7.10.1 - but the only file
+that imports it is `front/src/components/TourCard.js`, which nothing imports in
+turn. `front/src/App.js` renders every section of the site at once,
 stacked inside a single `<main>`:
 
 ```
@@ -48,7 +49,7 @@ layout). Their stylesheets are still bundled, because the imports at the top of
 |---|---|---|
 | `App` | `front/src/App.js` | Wraps everything in `LanguageProvider` and stacks the sections |
 | `Header` | `front/src/components/Header.js` | Fixed header: logo, site title, language `<select>`, `Navbar` |
-| `Navbar` | `front/src/components/Navbar.js` | Five mutually exclusive menu layouts; scroll-to-section |
+| `Navbar` | `front/src/components/Navbar.js` | Six mutually exclusive menu layouts; scroll-to-section |
 | `Footer` | `front/src/components/Footer.js` | Single copyright line |
 | `Fundraiser` | `front/src/pages/Fundraiser.js` | Hero banner, progress bar, two donate buttons |
 | `AboutUs` | `front/src/pages/AboutUs.js` | Team cards with Font Awesome social links |
@@ -75,7 +76,8 @@ throws.
 ### `Navbar` chooses its layout in JavaScript, not in CSS
 
 `Navbar.js:9` reads `window.innerWidth` into state and `Navbar.js:28-32`
-updates it on `resize`. The render then picks exactly one of five branches:
+updates it on `resize`. The render then picks exactly one of six branches, at
+`Navbar.js:37`, `:51`, `:73`, `:95`, `:117` and `:139`:
 
 | Condition | Rendered layout |
 |---|---|
@@ -89,17 +91,21 @@ updates it on `resize`. The render then picks exactly one of five branches:
 This is layout logic expressed in JavaScript rather than in media queries. It
 has two consequences: the menu does not respond to a viewport change until a
 `resize` event fires and re-renders the component, and the six link labels are
-duplicated across six JSX blocks. `front/src/components/Navbar.css` carries a
-**sixth** breakpoint of its own - `@media (max-width: 674px)` at
-`Navbar.css:74` - which styles the hamburger layout that the `<= 674` branch
-renders. The JavaScript boundaries and the CSS boundary have to be kept in step
-by hand. Note also that the conditions leave gaps at their own boundaries: each
-branch is written `<= upper && > lower`, and the next branch starts at
-`<= lower - 1`, so the width equal to `lower` itself is matched by no branch.
-At exactly 675, 768, 901, 1051 and 1151 CSS pixels the navbar renders no menu
-at all.
+duplicated across six JSX blocks. `front/src/components/Navbar.css` then
+restates the last of those six boundaries as an actual media query -
+`@media (max-width: 674px)` at `Navbar.css:74` - which styles the hamburger
+layout that the `<= 674` branch renders. So the six JavaScript boundaries and
+that one CSS boundary have to be kept in step by hand.
 
-Restructuring this is a rewrite, not a refactor, so it is recorded in
+**Six branches, five uncovered widths - the two counts are unrelated.** Each
+branch is written `<= upper && > lower` while the next begins at
+`<= lower - 1`, so the width equal to `lower` itself matches no branch at all.
+There are six branches and therefore five interior boundaries, and at exactly
+**675, 768, 901, 1051 and 1151** CSS pixels the navbar renders no menu.
+Task 11 of the refactor cycle closes those five gaps.
+
+Restructuring the branches into media queries is a separate matter - a rewrite
+rather than a refactor - and is recorded in
 [`decisions/0004-deferred-findings.md`](decisions/0004-deferred-findings.md).
 
 ## Content loading
@@ -115,12 +121,17 @@ Copy and data reach the page through **four different mechanisms**:
    that renders visible prose.
 
 2. **Per-language dynamic `import()` of bundled JSON, at render.**
-   `AboutUs.js:16` resolves `import('../assets/locales/about_us_' + language + '.json')`
-   and `Blog.js:15` resolves `import('../assets/news/news_' + language + '.json')`,
-   both written as template literals and both re-running when `language`
-   changes. webpack turns each template literal into one lazy chunk per
-   matching file, so this content arrives as a separate request after first
-   paint. Consumers: `AboutUs` (team members), `Blog` (news items).
+   `AboutUs.js:16` and `Blog.js:15` each resolve a template-literal `import()`,
+   re-running whenever `language` changes:
+
+   ```js
+   import(`../assets/locales/about_us_${language}.json`)   // AboutUs.js:16
+   import(`../assets/news/news_${language}.json`)          // Blog.js:15
+   ```
+
+   webpack turns each template literal into one lazy chunk per matching file,
+   so this content arrives as a separate request after first paint. Consumers:
+   `AboutUs` (team members), `Blog` (news items).
 
 3. **Runtime `fetch` of a file in `public/`.**
    `Testimonial.js:11-16` calls `fetch('/testimonials/testimonials.json')` once
