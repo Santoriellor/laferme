@@ -1,8 +1,13 @@
 # 4. Deferred findings
 
 Date: 2026-08-22
-Status: living document - appended to by Tasks 6, 10, 11, 12 and 14 of this
-refactor cycle as they complete
+Status: closed for this cycle - appended to by Tasks 6, 10, 11 and 12 of this
+refactor cycle as they completed. Task 14 (final verification) reviewed the
+register against its own checklist - the modal's focus trap, the carousel's
+auto-advance, `.our-team .description`'s contrast, `react-router-dom`, and the
+Phase B locale surprise - and found every required entry already present, so
+it made no further addition. This document is final for
+`refactor/website-laferme`.
 
 This records what the current refactor cycle deliberately leaves alone:
 problems found while documenting and surveying the site that are real, but that
