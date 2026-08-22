@@ -1114,6 +1114,24 @@ git commit -m "refactor(css): delete three unimported stylesheets and five unrea
 > live in both `global.css` and the per-page files, and consolidating the wrong
 > copy is invisible to CI.
 >
+> **Which instrument to use.** Task 5 builds `front/scripts/css-digest.js`,
+> which reduces a built stylesheet to an order-free digest and resolves `:root`
+> custom properties into their use sites. For **Task 6**, a pure deletion, the
+> strictest check is the raw `diff` above and it must be byte-identical. For
+> **Tasks 7, 8 and 9** the raw diff is noisy by design — you are moving and
+> renaming things — so the digest is the instrument that carries the argument:
+>
+> ```bash
+> cd front && npx react-scripts build && node scripts/css-digest.js build/static/css > /tmp/digest-before.txt
+> # ...make the change...
+> npx react-scripts build && node scripts/css-digest.js build/static/css > /tmp/digest-after.txt
+> diff /tmp/digest-before.txt /tmp/digest-after.txt
+> ```
+>
+> A pure consolidation must produce an **identical digest**. A deliberate change
+> must produce a diff containing exactly the lines you meant to change and no
+> others.
+>
 > The premise was independently re-confirmed on 2026-08-22: `grep -rn
 > "import.*\.css" front/src` lists 15 imports and none of the three dead files;
 > no CSS `@import` references them; `front/public/index.html` has no
@@ -1307,6 +1325,24 @@ git commit -m "refactor(css): give every animation exactly one definition"
 > live in both `global.css` and the per-page files, and consolidating the wrong
 > copy is invisible to CI.
 >
+> **Which instrument to use.** Task 5 builds `front/scripts/css-digest.js`,
+> which reduces a built stylesheet to an order-free digest and resolves `:root`
+> custom properties into their use sites. For **Task 6**, a pure deletion, the
+> strictest check is the raw `diff` above and it must be byte-identical. For
+> **Tasks 7, 8 and 9** the raw diff is noisy by design — you are moving and
+> renaming things — so the digest is the instrument that carries the argument:
+>
+> ```bash
+> cd front && npx react-scripts build && node scripts/css-digest.js build/static/css > /tmp/digest-before.txt
+> # ...make the change...
+> npx react-scripts build && node scripts/css-digest.js build/static/css > /tmp/digest-after.txt
+> diff /tmp/digest-before.txt /tmp/digest-after.txt
+> ```
+>
+> A pure consolidation must produce an **identical digest**. A deliberate change
+> must produce a diff containing exactly the lines you meant to change and no
+> others.
+>
 > The premise was independently re-confirmed on 2026-08-22: `grep -rn
 > "import.*\.css" front/src` lists 15 imports and none of the three dead files;
 > no CSS `@import` references them; `front/public/index.html` has no
@@ -1480,6 +1516,24 @@ git commit -m "refactor(css): move the tokens into one file and use them"
 > confirm each one is a rule you meant to move — the duplicated `@keyframes`
 > live in both `global.css` and the per-page files, and consolidating the wrong
 > copy is invisible to CI.
+>
+> **Which instrument to use.** Task 5 builds `front/scripts/css-digest.js`,
+> which reduces a built stylesheet to an order-free digest and resolves `:root`
+> custom properties into their use sites. For **Task 6**, a pure deletion, the
+> strictest check is the raw `diff` above and it must be byte-identical. For
+> **Tasks 7, 8 and 9** the raw diff is noisy by design — you are moving and
+> renaming things — so the digest is the instrument that carries the argument:
+>
+> ```bash
+> cd front && npx react-scripts build && node scripts/css-digest.js build/static/css > /tmp/digest-before.txt
+> # ...make the change...
+> npx react-scripts build && node scripts/css-digest.js build/static/css > /tmp/digest-after.txt
+> diff /tmp/digest-before.txt /tmp/digest-after.txt
+> ```
+>
+> A pure consolidation must produce an **identical digest**. A deliberate change
+> must produce a diff containing exactly the lines you meant to change and no
+> others.
 >
 > The premise was independently re-confirmed on 2026-08-22: `grep -rn
 > "import.*\.css" front/src` lists 15 imports and none of the three dead files;
