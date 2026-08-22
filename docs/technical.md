@@ -115,6 +115,12 @@ step is the one that must not.
 **`test`** - checks out, sets up Node 20, runs `npm ci` in `front/`, then:
 
 ```yaml
+- name: Check formatting
+  working-directory: front
+  run: npm run format:check
+- name: Lint
+  working-directory: front
+  run: npm run lint -- --max-warnings 0
 - name: Run tests
   working-directory: front
   env:
@@ -177,27 +183,51 @@ because `.dockerignore` patterns are anchored at the context root.
 
 ## Formatting
 
-There is **no formatter configured in this repository yet**. There is no
-`.prettierrc`, no `.editorconfig`, and no standalone ESLint configuration file;
-the only lint configuration is the inline `eslintConfig` key in
-`front/package.json`, which extends `react-app` and `react-app/jest`. That is
-what produces the three build warnings above, and it is all that runs today.
+Prettier and ESLint are both configured, both declared as pinned
+devDependencies in `front/package.json` (`prettier@3.4.2`, `eslint@8.57.1` -
+pinned rather than left to resolve transitively through `react-scripts`, so
+`npm ci` in CI installs them directly instead of depending on hoisting), and
+both gated in the `test` job of `.github/workflows/deploy.yml`.
 
-Formatting is consequently inconsistent by file: two-space and four-space
-indentation both appear across the stylesheets (compare `pages/Contact.css`
-with `pages/AboutUs.css`), and `src/App.css` mixes literal tabs into an
-otherwise space-indented block.
+Configuration lives in `front/.prettierrc` (printWidth 100, single quotes,
+otherwise Prettier's defaults) and `front/.eslintrc.json` (`extends:
+["react-app", "react-app/jest", "prettier"]` - the `prettier` entry turns off
+the ESLint rules that would otherwise fight Prettier over whitespace). There
+is no `eslintConfig` key in `front/package.json` any more; ESLint 8 reads at
+most one configuration per directory, so the two were never left in place
+together.
 
-Task 13 of the current refactor cycle introduces Prettier and a standalone
-`front/.eslintrc.json`, applies the formatter in **one commit containing
-formatting and nothing else**, and adds that commit's SHA to
-`.git-blame-ignore-revs` so `git blame` skips over it. Until that task lands,
-match the style of the file you are editing and do not reformat surrounding
-lines.
+Commands, run from `front/`:
 
-Once it lands, this section records the commands. Configure your editor to use
-the repository's Prettier rather than a global install, so that saving a file
-does not produce a diff nobody asked for.
+- `npm run format` - rewrites every file under `src/**/*.{js,jsx,css,json}`
+  and `scripts/**/*.js` to match the Prettier config.
+- `npm run format:check` - the same check without writing, used by CI.
+- `npm run lint` - runs ESLint over `src` and `scripts`.
+
+Configure your editor to use the repository's Prettier rather than a global
+install, so that saving a file does not produce a diff nobody asked for.
+
+The formatting sweep itself landed as one commit containing formatting and
+nothing else, and its SHA is recorded in `.git-blame-ignore-revs` at the
+repository root so `git blame` can skip over it. That file does nothing on its
+own - every fresh clone needs to opt in once:
+
+```bash
+git config blame.ignoreRevsFile .git-blame-ignore-revs
+```
+
+### Two ESLint rules are deliberately off for test files
+
+`front/.eslintrc.json` overrides `testing-library/no-container` and
+`testing-library/no-node-access` to `"off"` for `**/*.test.js`. Both rules
+push toward user-facing queries (`getByRole`, `getByText`, ...), which this
+suite already uses almost everywhere - but jsdom applies no stylesheet CSS, so
+the only way to assert on state that lives in a class (for example
+`Navbar.test.js` checking that `.menu` gains and loses the `open` class) is to
+query the DOM node or its class directly. That is not a shortcut around the
+rule; it is the only assertion available for CSS-keyed state in jsdom. Turning
+the rules off for test files, rather than rewriting the assertions to satisfy
+them, keeps that coverage instead of deleting it.
 
 ## Verifying a CSS change
 
