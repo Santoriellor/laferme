@@ -69,11 +69,14 @@
   cursor: pointer;
   display: none;
 
-  /* The element used to be a <div>. These four declarations strip the
-     button defaults so nothing about it looks different. */
+  /* The element used to be a <div>. These five declarations strip the
+     button defaults so nothing about it looks different. font-family rather
+     than the font shorthand on purpose: font: inherit would also reset the
+     font-size set three lines above and shrink the glyph from 30px. */
   border: none;
   background: none;
   color: inherit;
+  font-family: inherit;
   padding: 0;
 }
 
