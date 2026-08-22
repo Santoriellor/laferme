@@ -1771,6 +1771,39 @@ git commit -m "refactor: delete dead code and move the carousel's content into a
 
 ### Task 11: Accessibility baseline
 
+> **ADDED BEFORE EXECUTION — five window widths render no navigation at all.**
+>
+> Task 1 found this while writing the docs and it is verified. `Navbar.js`
+> selects its menu variant with five exclusive branches:
+>
+> ```
+> line  37:  windowWidth >  1151
+> line  51:  windowWidth <= 1150 && windowWidth >  1051
+> line  73:  windowWidth <= 1050 && windowWidth >   901
+> line  95:  windowWidth <=  900 && windowWidth >   768
+> line 117:  windowWidth <=  767 && windowWidth >   675
+> line 139:  windowWidth <=  674
+> ```
+>
+> Each branch's lower bound is exclusive while the next branch's upper bound is
+> one pixel below it, so **1151, 1051, 901, 768 and 675 fall through every
+> branch and the navbar renders no menu whatsoever** — no links, no hamburger.
+> A visitor whose window is exactly 768px wide, the single most common tablet
+> width there is, has no navigation.
+>
+> Fix it by making each lower bound inclusive of the boundary it shares, so the
+> ranges abut instead of leaving a one-pixel hole. Changing the six `>` bounds
+> to `>=` on lines 51, 73, 95 and 117 and widening line 37 to `>= 1151` closes
+> all five. Do not renumber the breakpoints or change which layout a width that
+> already works gets — the only widths whose rendering changes are those five.
+>
+> This is a defect, not characterized behaviour: spec decision D3 pins current
+> behaviour, but pinning this would make the deploy gate defend a navbar that
+> disappears. Write a test that asserts the corrected behaviour first, watch it
+> fail, then fix. Render `<Navbar />` at each of 1151, 1051, 901, 768 and 675
+> by setting `window.innerWidth` before mount, and assert a menu is present at
+> every one. jsdom lets you assign `window.innerWidth` directly.
+
 > **ADDED BEFORE EXECUTION — the closed mobile menu is reachable, and the plan does not list it.**
 >
 > `front/src/components/Navbar.css:74-95` hides the menu with `clip-path` alone:
