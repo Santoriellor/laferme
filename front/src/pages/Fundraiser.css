@@ -32,7 +32,7 @@
   padding-top: 40px;
 }
 
-.fundraiser-content h1 {
+.fundraiser-content h2 {
   font-size: 3rem;
   margin-bottom: 15px;
   animation: slideInLeft 1s ease-out;
@@ -71,6 +71,10 @@
   margin-bottom: 20px;
 }
   
+/* #c2410c rather than the brand accent #ff5733: white text on the accent
+   measures 3.15:1, below the 4.5:1 WCAG AA needs. The accent itself is the
+   site's brand colour and is not changed - see
+   docs/decisions/0004-deferred-findings.md. */
 .donate-btn {
   padding: 12px 25px;
   border: none;
@@ -79,10 +83,7 @@
   cursor: pointer;
   border-radius: 25px;
   transition: transform 0.3s ease;
-}
-
-.donate-btn {
-  background-color: #ff5733;
+  background-color: #c2410c;
   color: var(--colorwhite);
 }
 
@@ -106,7 +107,7 @@
 }
 .fixed-donate-btn {
   padding: 15px 25px;
-  background-color: #e63946;
+  background-color: #c0392b;
   color: var(--colorwhite);
   font-size: 1rem;
   border: none;
@@ -117,7 +118,7 @@
 }
 
 .fixed-donate-btn:hover {
-  background-color: #d62828;
+  background-color: #9a3412;
   transform: scale(1.1);
 } 
 

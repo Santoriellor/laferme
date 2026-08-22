@@ -43,11 +43,14 @@
   border-radius: 5px;
 }
 
+/* A literal rather than var(--color2): white on --color2 measures 3.83:1.
+   --color2 is unchanged - it also paints the mobile menu and the active
+   carousel indicator, where the contrast already passes. */
 .contact-form button {
   padding: 10px 20px;
   width: 300px;
   margin: 0 auto;
-  background-color: var(--color2);
+  background-color: #8c5a2b;
   color: var(--colorwhite);
   border: none;
   border-radius: 5px;
@@ -56,7 +59,7 @@
 }
 
 .contact-form button:hover {
-  background-color: #8c5a2b;
+  background-color: #6f4722;
 }
 
 /* Link styling for consistency */
