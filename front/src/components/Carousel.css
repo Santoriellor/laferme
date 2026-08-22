@@ -22,7 +22,7 @@
     font-family: monospace;
     font-size: 24px;
     background-color: rgba(0, 0, 0, 0.5);
-    color: white;
+    color: var(--colorwhite);
     border: none;
     border-radius: 50%;
     width: 40px;

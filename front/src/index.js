@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './assets/css/tokens.css';
 import './assets/css/animations.css';
 import './index.css';
 import App from './App';

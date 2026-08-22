@@ -28,7 +28,7 @@
     left: 50%;
     text-align: center;
     transform: translateX(-50%);
-    color: white;
+    color: var(--colorwhite);
     font-family: var(--font2);
     font-size: 2.5rem;
     font-weight: 400;

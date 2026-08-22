@@ -134,7 +134,10 @@ would be a visual change disguised as a cleanup.
   where a token's value causes a contrast failure, that is recorded as a
   deferred finding with the measured ratio in
   [`0004-deferred-findings.md`](0004-deferred-findings.md) and addressed
-  separately, without redefining the brand colour.
+  separately, without redefining the brand colour. It did cost one legacy
+  fallback declaration - moving `:root` out of `App.css` lost a
+  `postcss-preset-env` static fallback for `body`'s `font-family` that no
+  browser in the resolved browserslist set needed; see `docs/technical.md`.
 
 - **Two duplicated rules become site-wide by intent rather than by accident.**
   `Contact.css:80` currently declares `a { color: inherit; text-decoration:

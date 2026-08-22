@@ -247,3 +247,32 @@ anything else.
 
 "It looks the same" is not a verification. See
 [`decisions/0002-one-definition-per-idea-in-css.md`](decisions/0002-one-definition-per-idea-in-css.md).
+
+### A one-line exception: the Task 8 token move
+
+Task 8 (moving every `:root` custom property out of `App.css` into
+`front/src/assets/css/tokens.css`) is the one consolidation in this cycle
+whose digest is *not* byte-identical. The diff is exactly one line:
+
+```
+619d618
+< |body|font-family:Poppins,sans-serif
+```
+
+The line disappears because `postcss-preset-env` only emits a static
+legacy-browser fallback ahead of a `var()` declaration when it can resolve
+that custom property from a `:root` block in the *same source file* -
+`postcss-loader` runs per file, before webpack concatenates the bundle. In
+the original `App.css`, `:root` and its only in-file consumer (`body {
+font-family: var(--font1); }`) shared a file, so the fallback got emitted
+there and nowhere else - no other `var(--font1)`/`var(--font2)` usage in the
+project (`Header.css`, `Navbar.css`, `CarouselImage.css`, ...) ever received
+one. Moving `:root` into `tokens.css` removes that co-location, and with it
+the fallback. No token value changed.
+
+This is accepted as harmless: `npx browserslist` in `front/` resolves the
+production query to a set whose oldest members are `ios_saf 11.0-11.2` and
+`and_uc 15.5`, both of which support CSS custom properties natively, so the
+fallback was dead weight for every browser this project targets before it
+was lost. If a future digest ever turns up this exact line again, this is
+why - it is not a regression to chase.

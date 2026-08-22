@@ -56,7 +56,7 @@
   padding: 10px;
   width: 300px;
   margin: 0 auto;
-  border: 1px solid #ccc;
+  border: var(--border-subtle);
   border-radius: 5px;
 }
 
@@ -65,7 +65,7 @@
   width: 300px;
   margin: 0 auto;
   background-color: var(--color2);
-  color: white;
+  color: var(--colorwhite);
   border: none;
   border-radius: 5px;
   cursor: pointer;

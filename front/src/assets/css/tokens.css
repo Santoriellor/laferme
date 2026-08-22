@@ -1,0 +1,28 @@
+/* The web font and every design token, in one place. Nothing else may declare
+ * a :root custom property.
+ *
+ * The @import must stay at the top of a stylesheet to be valid CSS. Webpack
+ * hoists it to the top of the concatenated bundle, but keeping it first here
+ * means the source says what the output does. */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  /* Brand palette. Values unchanged from the block that used to live in
+   * App.css. --color4 and --color5 were declared there and used nowhere, so
+   * they are not carried over. */
+  --color1: #93441a;
+  --color2: rgb(182, 115, 50);
+  --color3: rgb(218, 171, 58);
+  --colorwhite: white;
+  --colorblack: black;
+
+  /* Typography. --font2 names Quintessential, whose @font-face import is
+   * commented out at the top of the old App.css, so it resolves to the
+   * sans-serif fallback. It is kept because removing it would change what
+   * .carousel-top-text renders in; see docs/decisions/0004-deferred-findings.md. */
+  --font1: 'Poppins', sans-serif;
+  --font2: 'Quintessential', sans-serif;
+
+  /* Borders. Written out identically in Header.css and Contact.css. */
+  --border-subtle: 1px solid #ccc;
+}

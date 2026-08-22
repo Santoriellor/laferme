@@ -96,7 +96,7 @@
 .our-team .title{
     font-size: 16px;
     font-weight: bold;
-    color: #fff;
+    color: var(--colorwhite);
     margin: 10px 0 5px;
     text-transform: uppercase;
     cursor: default;
@@ -105,14 +105,14 @@
     display: block;
     font-size: 14px;
     font-style: italic;
-    color: #fff;
+    color: var(--colorwhite);
     margin-bottom: 5px;
     text-transform: capitalize;
     cursor: default;
 }
 .our-team .description{
     font-size: 14px;
-    color: #fff;
+    color: var(--colorwhite);
     transform: translateY(100%);
     transition: all 0.30s ease 0.1s;
     cursor: default;
@@ -136,7 +136,7 @@
     margin: 20px 0;
 }
 .our-team .social-links li a{
-    color: #fff;
+    color: var(--colorwhite);
     padding: 10px 0;
 }
 .our-team .social-links li a:hover{
