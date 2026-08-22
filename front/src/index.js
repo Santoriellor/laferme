@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './assets/css/tokens.css';
 import './assets/css/animations.css';
+import './assets/css/sections.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';

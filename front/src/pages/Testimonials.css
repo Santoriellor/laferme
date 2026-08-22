@@ -1,26 +1,6 @@
 #testimonials {
-  position: relative;
-  width: 100%;
-  min-height: fit-content;
-  background: var(--colorwhite);
-  margin: 0;
-  padding: 0;
-
   text-align: center;
   overflow: hidden;
-
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: flex-start;
-}
-
-.testimonials-title {
-  margin: 15px 0;
-  padding: 0;
-  font-size: 3rem;
-  text-align: center;
 }
 
 /* Slider Container */

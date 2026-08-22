@@ -1,11 +1,4 @@
 #showcase {
-    position: relative;
-    width: 100%;
-    min-height: fit-content;
-    background: var(--colorwhite);
-    margin: 0;
-    padding: 0;
-    
     display: flex;
     flex-direction: column;
     align-items: center;
