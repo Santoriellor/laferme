@@ -14,12 +14,11 @@ import './App.css';
 import { LanguageProvider } from './context/LanguageContext';
 
 const App = () => {
-
   return (
     <LanguageProvider>
-    <div className='content'>
-      <Header />
-      <main className="main-container">
+      <div className="content">
+        <Header />
+        <main className="main-container">
           <Fundraiser />
           <AboutUs />
           <Contact />
@@ -28,9 +27,9 @@ const App = () => {
           {/* <BikingTour /> */}
           {/* <HorseRiding /> */}
           <Testimonials />
-      </main>
-      <Footer />
-    </div>
+        </main>
+        <Footer />
+      </div>
     </LanguageProvider>
   );
 };

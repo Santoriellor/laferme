@@ -23,26 +23,26 @@
       }
     },
     {
-        "name": "Sophia Reynolds",
-        "position": "Coordinatrice de l'Expérience Client",
-        "description": "Sophia organise des visites de la ferme, des excursions locales et des événements saisonniers pour rendre chaque séjour inoubliable. Elle est passionnée par l'hospitalité et la nature.",
-        "image": "/images/aboutus/user4.jpg",
-        "socialLinks": {
-            "linkedin": "https://linkedin.com/in/sophiaguesthouse",
-            "twitter": "https://twitter.com/sophiaguesthouse",
-            "facebook": "https://facebook.com/sophiaguesthouse"
-        }
+      "name": "Sophia Reynolds",
+      "position": "Coordinatrice de l'Expérience Client",
+      "description": "Sophia organise des visites de la ferme, des excursions locales et des événements saisonniers pour rendre chaque séjour inoubliable. Elle est passionnée par l'hospitalité et la nature.",
+      "image": "/images/aboutus/user4.jpg",
+      "socialLinks": {
+        "linkedin": "https://linkedin.com/in/sophiaguesthouse",
+        "twitter": "https://twitter.com/sophiaguesthouse",
+        "facebook": "https://facebook.com/sophiaguesthouse"
+      }
     },
     {
-        "name": "Noah Bennett",
-        "position": "Chef Cuisinier",
-        "description": "Noah prépare des repas du potager à l'assiette en utilisant les produits frais de la ferme. Ses petits-déjeuners et confitures maison sont les préférés des visiteurs !",
-        "image": "/images/aboutus/user3.jpg",
-        "socialLinks": {
-            "linkedin": "https://linkedin.com/in/noahcooks",
-            "twitter": "https://twitter.com/noahcooks",
-            "facebook": "https://facebook.com/noahcooks"
-        }
+      "name": "Noah Bennett",
+      "position": "Chef Cuisinier",
+      "description": "Noah prépare des repas du potager à l'assiette en utilisant les produits frais de la ferme. Ses petits-déjeuners et confitures maison sont les préférés des visiteurs !",
+      "image": "/images/aboutus/user3.jpg",
+      "socialLinks": {
+        "linkedin": "https://linkedin.com/in/noahcooks",
+        "twitter": "https://twitter.com/noahcooks",
+        "facebook": "https://facebook.com/noahcooks"
+      }
     }
   ]
 }

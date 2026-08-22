@@ -1,21 +1,24 @@
-#root, main {
+#root,
+main {
   display: block;
   width: 100%;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   /* outline: 1px solid red; */
 }
 
 body {
   scroll-behavior: smooth;
-	margin: 0;
-	font-family: var(--font1);
+  margin: 0;
+  font-family: var(--font1);
   min-width: 375px;
   width: 100%;
   overflow-x: hidden;
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 
 .content {
@@ -28,5 +31,3 @@ body {
   padding: 0;
   width: 100%;
 }
-
-

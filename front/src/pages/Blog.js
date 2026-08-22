@@ -14,25 +14,25 @@ const Blog = () => {
   useEffect(() => {
     import(`../assets/news/news_${language}.json`)
       .then((data) => setNewsData(data.news))
-      .catch((error) => console.error("Error loading news data:", error));
+      .catch((error) => console.error('Error loading news data:', error));
   }, [language]);
-  
+
   useEffect(() => {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true); // Trigger animation
-          }
-        },
-        { threshold: 0.3 } // Trigger when 20% of the section is visible
-      );
-  
-      if (sectionRef.current) {
-        observer.observe(sectionRef.current);
-      }
-  
-      return () => observer.disconnect(); // Cleanup
-    }, []);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true); // Trigger animation
+        }
+      },
+      { threshold: 0.3 }, // Trigger when 20% of the section is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect(); // Cleanup
+  }, []);
 
   // Escape closes the article. Without this the only way out is the mouse,
   // which strands a keyboard user inside the overlay.
@@ -59,7 +59,9 @@ const Blog = () => {
             <img src={post.image} alt={post.title} className="blog-image" />
             <div className="blog-info">
               <h3>{post.title}</h3>
-              <p><i>{post.date}</i></p>
+              <p>
+                <i>{post.date}</i>
+              </p>
               <p className="blog-preview">{post.content.slice(0, 100)}...</p>
             </div>
           </button>
@@ -73,14 +75,18 @@ const Blog = () => {
             role="dialog"
             aria-modal="true"
             aria-label={selectedPost.title}
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
           >
-            <button className="close-button" onClick={() => setSelectedPost(null)}>✖</button>
+            <button className="close-button" onClick={() => setSelectedPost(null)}>
+              ✖
+            </button>
             <div className="modal-body">
               <img src={selectedPost.image} alt={selectedPost.title} />
               <div className="modal-info">
                 <h3>{selectedPost.title}</h3>
-                <p><i>{selectedPost.date}</i></p>
+                <p>
+                  <i>{selectedPost.date}</i>
+                </p>
                 <p>{selectedPost.content}</p>
               </div>
             </div>

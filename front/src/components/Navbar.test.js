@@ -54,9 +54,7 @@ describe('the navigation at the default 1024px viewport', () => {
     fireEvent.click(screen.getByRole('button', { name: 'About Us' }));
 
     expect(window.scrollTo).toHaveBeenCalledTimes(1);
-    expect(window.scrollTo).toHaveBeenCalledWith(
-      expect.objectContaining({ behavior: 'smooth' }),
-    );
+    expect(window.scrollTo).toHaveBeenCalledWith(expect.objectContaining({ behavior: 'smooth' }));
   });
 });
 

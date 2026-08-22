@@ -61,9 +61,7 @@ describe('heading structure', () => {
 
   it('titles every section with a level-two heading', async () => {
     await renderApp();
-    const titles = screen
-      .getAllByRole('heading', { level: 2 })
-      .map((h) => h.textContent);
+    const titles = screen.getAllByRole('heading', { level: 2 }).map((h) => h.textContent);
     expect(titles).toEqual(
       expect.arrayContaining([
         'Help Us Save La Ferme',
@@ -187,9 +185,7 @@ describe('everything interactive has an accessible name', () => {
 
   it('describes each carousel image in the visitor’s language', async () => {
     await renderApp();
-    expect(
-      screen.getByAltText('The farmhouse and its grounds in Tuscany'),
-    ).toBeInTheDocument();
+    expect(screen.getByAltText('The farmhouse and its grounds in Tuscany')).toBeInTheDocument();
 
     fireEvent.change(screen.getByRole('combobox', { name: 'Language' }), {
       target: { value: 'fr' },

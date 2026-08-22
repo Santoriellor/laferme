@@ -11,9 +11,8 @@
   text-align: center;
 
   overflow-x: hidden;
-  
 }
-  
+
 .overlay {
   position: absolute;
   top: 0;
@@ -25,7 +24,7 @@
   align-items: flex-start;
   justify-content: center;
 }
-  
+
 .fundraiser-content {
   max-width: 600px;
   padding: 20px;
@@ -38,13 +37,11 @@
   animation: slideInLeft 1s ease-out;
 }
 
-
 .fundraiser-content p {
   font-size: 1.2rem;
   margin-bottom: 25px;
   animation: slideInRight 1s ease-out;
 }
-
 
 .progress-bar {
   width: 100%;
@@ -70,7 +67,7 @@
   font-size: 1rem;
   margin-bottom: 20px;
 }
-  
+
 /* #c2410c rather than the brand accent #ff5733: white text on the accent
    measures 3.15:1, below the 4.5:1 WCAG AA needs. The accent itself is the
    site's brand colour and is not changed - see
@@ -99,7 +96,7 @@
   z-index: 1001;
   overflow: hidden;
   transition: clip-path 0.5s ease-in-out;
-  
+
   clip-path: inset(0 100% 0 0);
 }
 .fixed-donate-btn-wrapper.show {
@@ -120,13 +117,13 @@
 .fixed-donate-btn:hover {
   background-color: #9a3412;
   transform: scale(1.1);
-} 
+}
 
 @media (max-width: 620px) and (min-width: 545px) {
   #fundraiser {
     height: 700px;
   }
-} 
+}
 
 @media (max-width: 544px) and (min-width: 450px) {
   #fundraiser {
@@ -138,10 +135,10 @@
   #fundraiser {
     height: 800px;
   }
-} 
+}
 
 @media (max-width: 415px) {
   #fundraiser {
     height: 850px;
   }
-} 
+}

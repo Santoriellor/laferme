@@ -25,9 +25,7 @@ const Carousel = () => {
   const prevSlide = useCallback(() => {
     setTransitioning(true);
     setTimeout(() => {
-      setCurrentIndex(
-        (prevIndex) => (prevIndex - 1 + images.length) % images.length
-      );
+      setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
       setTransitioning(false);
     }, 500); // Match the CSS transition duration
   }, [images.length]);
@@ -44,8 +42,8 @@ const Carousel = () => {
   // Handle clicking on the indicators
   const goToSlide = (index) => {
     if (!transitioning) {
-        setCurrentIndex(index);
-      }
+      setCurrentIndex(index);
+    }
   };
 
   return (
@@ -64,7 +62,7 @@ const Carousel = () => {
           />
         ))}
       </div>
-        
+
       {/* Left Arrow */}
       <button className="arrow left" onClick={prevSlide}>
         &#10094;

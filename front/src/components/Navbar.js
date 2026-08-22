@@ -62,7 +62,9 @@ const Navbar = () => {
               <div className="dropdown-content">
                 {/* <button onClick={() => scrollToSection('biking-tour')}>Biking Tour</button>
                 <button onClick={() => scrollToSection('horse-riding')}>Horse Riding</button> */}
-                <button onClick={() => scrollToSection('testimonials')}>{texts.menuTestimonials}</button>
+                <button onClick={() => scrollToSection('testimonials')}>
+                  {texts.menuTestimonials}
+                </button>
               </div>
             )}
           </div>
@@ -84,7 +86,9 @@ const Navbar = () => {
                 {/* <button onClick={() => scrollToSection('biking-tour')}>Biking Tour</button>
                 <button onClick={() => scrollToSection('horse-riding')}>Horse Riding</button> */}
                 <button onClick={() => scrollToSection('showcase')}>{texts.menuGallery}</button>
-                <button onClick={() => scrollToSection('testimonials')}>{texts.menuTestimonials}</button>
+                <button onClick={() => scrollToSection('testimonials')}>
+                  {texts.menuTestimonials}
+                </button>
               </div>
             )}
           </div>
@@ -106,7 +110,9 @@ const Navbar = () => {
                 <button onClick={() => scrollToSection('horse-riding')}>Horse Riding</button> */}
                 <button onClick={() => scrollToSection('blog')}>{texts.menuNews}</button>
                 <button onClick={() => scrollToSection('showcase')}>{texts.menuGallery}</button>
-                <button onClick={() => scrollToSection('testimonials')}>{texts.menuTestimonials}</button>
+                <button onClick={() => scrollToSection('testimonials')}>
+                  {texts.menuTestimonials}
+                </button>
               </div>
             )}
           </div>
@@ -128,7 +134,9 @@ const Navbar = () => {
                 <button onClick={() => scrollToSection('contact')}>{texts.menuContact}</button>
                 <button onClick={() => scrollToSection('blog')}>{texts.menuNews}</button>
                 <button onClick={() => scrollToSection('showcase')}>{texts.menuGallery}</button>
-                <button onClick={() => scrollToSection('testimonials')}>{texts.menuTestimonials}</button>
+                <button onClick={() => scrollToSection('testimonials')}>
+                  {texts.menuTestimonials}
+                </button>
               </div>
             )}
           </div>
@@ -139,14 +147,16 @@ const Navbar = () => {
       {windowWidth <= 674 && (
         <>
           <div className={`menu ${menuOpen ? 'open' : ''}`}>
-          <button onClick={() => scrollToSection('fundraiser')}>{texts.menuHome}</button>
-          <button onClick={() => scrollToSection('about-us')}>{texts.menuAboutUs}</button>
-          <button onClick={() => scrollToSection('contact')}>{texts.menuContact}</button>
-          <button onClick={() => scrollToSection('blog')}>{texts.menuNews}</button>
-          {/* <button onClick={() => scrollToSection('biking-tour')}>Biking Tour</button>
+            <button onClick={() => scrollToSection('fundraiser')}>{texts.menuHome}</button>
+            <button onClick={() => scrollToSection('about-us')}>{texts.menuAboutUs}</button>
+            <button onClick={() => scrollToSection('contact')}>{texts.menuContact}</button>
+            <button onClick={() => scrollToSection('blog')}>{texts.menuNews}</button>
+            {/* <button onClick={() => scrollToSection('biking-tour')}>Biking Tour</button>
           <button onClick={() => scrollToSection('horse-riding')}>Horse Riding</button> */}
-          <button onClick={() => scrollToSection('showcase')}>{texts.menuGallery}</button>
-          <button onClick={() => scrollToSection('testimonials')}>{texts.menuTestimonials}</button>
+            <button onClick={() => scrollToSection('showcase')}>{texts.menuGallery}</button>
+            <button onClick={() => scrollToSection('testimonials')}>
+              {texts.menuTestimonials}
+            </button>
           </div>
 
           {/* Hamburger icon */}

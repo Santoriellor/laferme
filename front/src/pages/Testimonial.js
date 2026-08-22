@@ -7,7 +7,7 @@ const Testimonials = () => {
   const [testimonials, setTestimonials] = useState([]);
 
   const { texts } = useContext(LanguageContext);
-  
+
   useEffect(() => {
     fetch('/testimonials/testimonials.json')
       .then((response) => response.json())
@@ -21,14 +21,16 @@ const Testimonials = () => {
   return (
     <section id="testimonials">
       <h2 className="testimonials-title">{texts.testimonialsTitle}</h2>
-      
+
       {/* Top Slider - Right to Left */}
       <div className="slider-container">
         <div className="slider slider-left">
           {doubledTestimonials.map((testimonial, index) => (
             <div className="testimonial-card" key={`top-${index}`}>
               <p className="message">"{testimonial.message}"</p>
-              <p className="author">- {testimonial.name}, {testimonial.role}</p>
+              <p className="author">
+                - {testimonial.name}, {testimonial.role}
+              </p>
             </div>
           ))}
         </div>
@@ -40,7 +42,9 @@ const Testimonials = () => {
           {doubledTestimonials.map((testimonial, index) => (
             <div className="testimonial-card" key={`bottom-${index}`}>
               <p className="message">"{testimonial.message}"</p>
-              <p className="author">- {testimonial.name}, {testimonial.role}</p>
+              <p className="author">
+                - {testimonial.name}, {testimonial.role}
+              </p>
             </div>
           ))}
         </div>

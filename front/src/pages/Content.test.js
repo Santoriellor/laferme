@@ -43,10 +43,7 @@ describe('the team section', () => {
 
   it('gives every portrait the person it shows as its alternative text', async () => {
     await renderApp();
-    expect(screen.getByAltText('Emma Carter')).toHaveAttribute(
-      'src',
-      '/images/aboutus/user2.jpg',
-    );
+    expect(screen.getByAltText('Emma Carter')).toHaveAttribute('src', '/images/aboutus/user2.jpg');
   });
 
   it('links each member to three social profiles', async () => {
@@ -112,7 +109,12 @@ describe('the testimonials section', () => {
 
   it('has a real testimonials.json backing the fetch it stubs above', () => {
     const testimonialsPath = path.join(
-      __dirname, '..', '..', 'public', 'testimonials', 'testimonials.json',
+      __dirname,
+      '..',
+      '..',
+      'public',
+      'testimonials',
+      'testimonials.json',
     );
     const raw = fs.readFileSync(testimonialsPath, 'utf8');
     expect(() => JSON.parse(raw)).not.toThrow();
@@ -129,8 +131,8 @@ describe('the showcase carousel', () => {
 
   it('renders the three images in order', async () => {
     const { container } = await renderApp();
-    const sources = Array.from(container.querySelectorAll('.carousel-image')).map(
-      (img) => img.getAttribute('src'),
+    const sources = Array.from(container.querySelectorAll('.carousel-image')).map((img) =>
+      img.getAttribute('src'),
     );
     expect(sources).toEqual([
       'farm-in-tuscany.jpg',
