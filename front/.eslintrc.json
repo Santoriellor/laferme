@@ -1,0 +1,17 @@
+{
+  "root": true,
+  "extends": ["react-app", "react-app/jest", "prettier"],
+  "overrides": [
+    {
+      // jsdom applies no stylesheet CSS, so class-based queries are the only way
+      // to assert on CSS-keyed state (e.g. a toggled "open" class). The container
+      // and node-access queries in this suite are deliberate for that reason, not
+      // a shortcut around Testing Library's user-facing queries.
+      "files": ["**/*.test.js"],
+      "rules": {
+        "testing-library/no-container": "off",
+        "testing-library/no-node-access": "off"
+      }
+    }
+  ]
+}

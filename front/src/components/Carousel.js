@@ -1,18 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import './Carousel.css';
 import CarouselImage from './CarouselImage.js';
 
-import farmImage from '../assets/images/farm-in-tuscany.jpg';
-import bikeImage from '../assets/images/bike-tour-tuscany.jpg';
-import horseImage from '../assets/images/horse-riding-tuscany.jpg';
+import { carouselSlides } from '../assets/data/carouselSlides';
+import { LanguageContext } from '../context/LanguageContext';
 
 const Carousel = () => {
-  const images = [
-    { src: farmImage, alt: 'Image 1', text: 'Text describing the general activities around the farm' },
-    { src: bikeImage, alt: 'Image 2', text: 'Text describing the biking activities around the farm' },
-    { src: horseImage, alt: 'Image 3', text: 'Text describing the horse riding activities around the farm' },
-    // Add more images as needed
-  ];
+  const { texts } = useContext(LanguageContext);
+  const images = carouselSlides;
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -30,9 +25,7 @@ const Carousel = () => {
   const prevSlide = useCallback(() => {
     setTransitioning(true);
     setTimeout(() => {
-      setCurrentIndex(
-        (prevIndex) => (prevIndex - 1 + images.length) % images.length
-      );
+      setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
       setTransitioning(false);
     }, 500); // Match the CSS transition duration
   }, [images.length]);
@@ -49,8 +42,8 @@ const Carousel = () => {
   // Handle clicking on the indicators
   const goToSlide = (index) => {
     if (!transitioning) {
-        setCurrentIndex(index);
-      }
+      setCurrentIndex(index);
+    }
   };
 
   return (
@@ -62,15 +55,14 @@ const Carousel = () => {
       <div className="carousel-image-container">
         {images.map((image, index) => (
           <CarouselImage
-            key={index}
+            key={image.altKey}
             imageSrc={image.src}
-            altText={image.alt}
-            bottomText={image.text}
-            isActive={index === currentIndex} // Pass active state
+            altText={texts[image.altKey]}
+            isActive={index === currentIndex}
           />
         ))}
       </div>
-        
+
       {/* Left Arrow */}
       <button className="arrow left" onClick={prevSlide}>
         &#10094;
@@ -84,11 +76,14 @@ const Carousel = () => {
       {/* Indicators */}
       <div className="carousel-indicators">
         {images.map((image, index) => (
-          <span
-            key={index}
+          <button
+            type="button"
+            key={image.altKey}
             className={`indicator ${index === currentIndex ? 'active' : ''}`}
+            aria-label={`${texts.carouselSlide} ${index + 1}`}
+            aria-current={index === currentIndex}
             onClick={() => goToSlide(index)}
-          ></span>
+          />
         ))}
       </div>
     </div>

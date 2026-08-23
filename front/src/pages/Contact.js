@@ -16,7 +16,7 @@ const Contact = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
 
     if (sectionRef.current) {
@@ -28,12 +28,29 @@ const Contact = () => {
 
   return (
     <section id="contact" ref={sectionRef} className={isVisible ? 'visible' : ''}>
-      <h1 className="contact-title">{texts.contactTitle}</h1>
+      <h2 className="contact-title">{texts.contactTitle}</h2>
       <p className="contact-description">{texts.contactDescr}</p>
       <form className="contact-form">
-        <input type="text" placeholder={texts.contactName} required />
-        <input type="email" placeholder={texts.contactEmail} required />
-        <textarea placeholder={texts.contactMsg} required></textarea>
+        <input
+          type="text"
+          name="name"
+          aria-label={texts.contactName}
+          placeholder={texts.contactName}
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          aria-label={texts.contactEmail}
+          placeholder={texts.contactEmail}
+          required
+        />
+        <textarea
+          name="message"
+          aria-label={texts.contactMsg}
+          placeholder={texts.contactMsg}
+          required
+        ></textarea>
         <button type="submit">{texts.contactSend}</button>
       </form>
     </section>
@@ -41,4 +58,3 @@ const Contact = () => {
 };
 
 export default Contact;
-

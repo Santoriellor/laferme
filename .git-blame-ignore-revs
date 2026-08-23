@@ -1,0 +1,4 @@
+# Commits that only reformat. Enable with:
+#   git config blame.ignoreRevsFile .git-blame-ignore-revs
+# Prettier sweep, 2026-08-22
+b8d978ae0c122deeba21c9d40d93b2114f627a01

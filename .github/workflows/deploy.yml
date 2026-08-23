@@ -18,6 +18,12 @@ jobs:
       - name: Install dependencies
         working-directory: front
         run: npm ci
+      - name: Check formatting
+        working-directory: front
+        run: npm run format:check
+      - name: Lint
+        working-directory: front
+        run: npm run lint -- --max-warnings 0
       - name: Run tests
         working-directory: front
         env:

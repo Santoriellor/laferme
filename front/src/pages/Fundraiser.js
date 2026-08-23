@@ -6,19 +6,19 @@ import { LanguageContext } from '../context/LanguageContext';
 const Fundraiser = () => {
   const sectionRef = useRef(null);
   const [showFixedButton, setShowFixedButton] = useState(false);
-  const [raised, setRaised] = useState(1500);  // Amount raised so far
-  const goal = 10000;  // Fundraising goal
+  const raised = 1500; // Amount raised so far
+  const goal = 10000; // Fundraising goal
   const progressPercentage = (raised / goal) * 100;
   const progressRef = useRef(null);
 
   const { texts } = useContext(LanguageContext);
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setShowFixedButton(!entry.isIntersecting);
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     if (sectionRef.current) {
@@ -40,25 +40,29 @@ const Fundraiser = () => {
     <section id="fundraiser" ref={sectionRef}>
       <div className="overlay">
         <div className="fundraiser-content">
-          <h1>{texts.fundraiserTitle}</h1>
+          <h2>{texts.fundraiserTitle}</h2>
           <p>{texts.fundraiserText}</p>
-          
+
           <div className="progress-bar">
             <div
-              ref={progressRef} 
-              className="progress-fill" 
+              ref={progressRef}
+              className="progress-fill"
               style={{ '--progress-width': `${progressPercentage}%` }}
             ></div>
           </div>
-          <p className="goal-text">${raised.toLocaleString()}{texts.fundraiserProgressGoalBefore} ${goal.toLocaleString()}{texts.fundraiserProgressGoalAfter}</p>
+          <p className="goal-text">
+            ${raised.toLocaleString()}
+            {texts.fundraiserProgressGoalBefore} ${goal.toLocaleString()}
+            {texts.fundraiserProgressGoalAfter}
+          </p>
 
           <button className="donate-btn">{texts.fundraiserDonate}</button>
           {/* <button className="learn-btn">{texts.fundraiserLearnMore}</button> */}
         </div>
       </div>
-      <div class={`fixed-donate-btn-wrapper ${showFixedButton ? 'show' : ''}`}>
+      <div className={`fixed-donate-btn-wrapper ${showFixedButton ? 'show' : ''}`}>
         <button className="fixed-donate-btn">{texts.fundraiserDonateFixed}</button>
-      </div>  
+      </div>
     </section>
   );
 };

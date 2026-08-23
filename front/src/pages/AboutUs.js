@@ -15,7 +15,7 @@ const AboutUs = () => {
   useEffect(() => {
     import(`../assets/locales/about_us_${language}.json`)
       .then((data) => setTeamData(data.team))
-      .catch((error) => console.error("Error loading team data:", error));
+      .catch((error) => console.error('Error loading team data:', error));
   }, [language]);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const AboutUs = () => {
           setIsVisible(true); // Trigger animation
         }
       },
-      { threshold: 0.2 } // Trigger when 20% of the section is visible
+      { threshold: 0.2 }, // Trigger when 20% of the section is visible
     );
 
     if (sectionRef.current) {
@@ -37,23 +37,35 @@ const AboutUs = () => {
 
   return (
     <section id="about-us" ref={sectionRef}>
-      <h1 className={`about-title ${isVisible ? 'active' : ''}`}>{texts.menuAboutUs}</h1>
+      <h2 className={`about-title ${isVisible ? 'active' : ''}`}>{texts.menuAboutUs}</h2>
       <div className="about-container">
         {teamData.map((person, index) => (
           <div key={index} className={`our-team ${isVisible ? 'active' : ''}`}>
-              <img src={person.image} alt={person.name} />
-              <div className="over-layer">
-                  <div className="team-content">
-                      <h3 className="title">{person.name}</h3>
-                      <span className="post">{person.position}</span>
-                      <p className="description">{person.description}</p>
-                  </div>
+            <img src={person.image} alt={person.name} />
+            <div className="over-layer">
+              <div className="team-content">
+                <h3 className="title">{person.name}</h3>
+                <span className="post">{person.position}</span>
+                <p className="description">{person.description}</p>
               </div>
-              <ul className="social-links">
-                <li><a href={person.socialLinks.twitter}><FontAwesomeIcon icon={faTwitter} /></a></li>
-                <li><a href={person.socialLinks.linkedin}><FontAwesomeIcon icon={faLinkedin} /></a></li>
-                <li><a href={person.socialLinks.facebook}><FontAwesomeIcon icon={faFacebook} /></a></li>
-              </ul>
+            </div>
+            <ul className="social-links">
+              <li>
+                <a href={person.socialLinks.twitter} aria-label={`${person.name} – Twitter`}>
+                  <FontAwesomeIcon icon={faTwitter} />
+                </a>
+              </li>
+              <li>
+                <a href={person.socialLinks.linkedin} aria-label={`${person.name} – LinkedIn`}>
+                  <FontAwesomeIcon icon={faLinkedin} />
+                </a>
+              </li>
+              <li>
+                <a href={person.socialLinks.facebook} aria-label={`${person.name} – Facebook`}>
+                  <FontAwesomeIcon icon={faFacebook} />
+                </a>
+              </li>
+            </ul>
           </div>
         ))}
       </div>

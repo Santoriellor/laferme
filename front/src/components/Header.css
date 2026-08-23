@@ -40,8 +40,8 @@
 .language-select {
   padding: 6px 10px;
   border-radius: 5px;
-  border: 1px solid #ccc;
-  background-color: white;
+  border: var(--border-subtle);
+  background-color: var(--colorwhite);
   cursor: pointer;
   margin: 0 20px 0 0;
 }
@@ -62,5 +62,4 @@
   .header-logo {
     width: 60px;
   }
-} 
-
+}

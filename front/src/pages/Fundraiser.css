@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   height: 680px;
-  color: #fff;
+  color: var(--colorwhite);
   background: url('../assets/images/hero-banner.jpeg') center/cover no-repeat;
 
   display: flex;
@@ -11,9 +11,8 @@
   text-align: center;
 
   overflow-x: hidden;
-  
 }
-  
+
 .overlay {
   position: absolute;
   top: 0;
@@ -25,26 +24,24 @@
   align-items: flex-start;
   justify-content: center;
 }
-  
+
 .fundraiser-content {
   max-width: 600px;
   padding: 20px;
   padding-top: 40px;
 }
 
-.fundraiser-content h1 {
+.fundraiser-content h2 {
   font-size: 3rem;
   margin-bottom: 15px;
   animation: slideInLeft 1s ease-out;
 }
-
 
 .fundraiser-content p {
   font-size: 1.2rem;
   margin-bottom: 25px;
   animation: slideInRight 1s ease-out;
 }
-
 
 .progress-bar {
   width: 100%;
@@ -70,8 +67,12 @@
   font-size: 1rem;
   margin-bottom: 20px;
 }
-  
-.donate-btn, .learn-btn {
+
+/* #c2410c rather than the brand accent #ff5733: white text on the accent
+   measures 3.15:1, below the 4.5:1 WCAG AA needs. The accent itself is the
+   site's brand colour and is not changed - see
+   docs/decisions/0004-deferred-findings.md. */
+.donate-btn {
   padding: 12px 25px;
   border: none;
   margin: 10px;
@@ -79,26 +80,12 @@
   cursor: pointer;
   border-radius: 25px;
   transition: transform 0.3s ease;
-}
-
-.donate-btn {
-  background-color: #ff5733;
-  color: #fff;
+  background-color: #c2410c;
+  color: var(--colorwhite);
 }
 
 .donate-btn:hover {
   transform: scale(1.1);
-}
-
-.learn-btn {
-  background-color: transparent;
-  border: 2px solid #fff;
-  color: #fff;
-}
-
-.learn-btn:hover {
-  background-color: #fff;
-  color: #000;
 }
 
 .fixed-donate-btn-wrapper {
@@ -109,7 +96,7 @@
   z-index: 1001;
   overflow: hidden;
   transition: clip-path 0.5s ease-in-out;
-  
+
   clip-path: inset(0 100% 0 0);
 }
 .fixed-donate-btn-wrapper.show {
@@ -117,8 +104,8 @@
 }
 .fixed-donate-btn {
   padding: 15px 25px;
-  background-color: #e63946;
-  color: #fff;
+  background-color: #c0392b;
+  color: var(--colorwhite);
   font-size: 1rem;
   border: none;
   border-radius: 25px;
@@ -128,15 +115,15 @@
 }
 
 .fixed-donate-btn:hover {
-  background-color: #d62828;
+  background-color: #9a3412;
   transform: scale(1.1);
-} 
+}
 
 @media (max-width: 620px) and (min-width: 545px) {
   #fundraiser {
     height: 700px;
   }
-} 
+}
 
 @media (max-width: 544px) and (min-width: 450px) {
   #fundraiser {
@@ -148,45 +135,10 @@
   #fundraiser {
     height: 800px;
   }
-} 
+}
 
 @media (max-width: 415px) {
   #fundraiser {
     height: 850px;
-  }
-} 
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-@keyframes slideInRight {
-  from {
-      opacity: 0;
-      transform: translateX(100px);
-  }
-  to {
-      opacity: 1;
-      transform: translateX(0);
-  }
-}
-@keyframes pulse {
-  0% {
-      transform: scale(1);
-      box-shadow: 0 0 10px rgba(230, 57, 70, 0.5);
-  }
-  50% {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(230, 57, 70, 0.7);
-  }
-  100% {
-      transform: scale(1);
-      box-shadow: 0 0 10px rgba(230, 57, 70, 0.5);
   }
 }

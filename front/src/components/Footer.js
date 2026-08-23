@@ -8,7 +8,9 @@ const Footer = () => {
 
   return (
     <footer className="footer">
-      <p>&copy; 2025 {texts.footerName} | {texts.footerRights}</p>
+      <p>
+        &copy; 2025 {texts.footerName} | {texts.footerRights}
+      </p>
     </footer>
   );
 };
