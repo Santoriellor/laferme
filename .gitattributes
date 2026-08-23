@@ -1,0 +1,14 @@
+* text=auto eol=lf
+
+# Explicitly mark binary assets so autocrlf/eol normalization never touches
+# them, regardless of git's content heuristics.
+*.ico binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.svg binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
